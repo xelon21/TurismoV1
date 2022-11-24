@@ -11,8 +11,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TurismoBD.Controladores;
+using static Microsoft.AspNetCore.Razor.Language.TagHelperMetadata;
+using TurismoBD.Entidades;
 
 namespace proyecto1
 {
@@ -20,12 +23,71 @@ namespace proyecto1
     public partial class InformeRentabilidad : Form
     {
         InformesController info = new InformesController();
+        ComboBoxsTurismo combo = new ComboBoxsTurismo();
+        DepartamentoController depto = new DepartamentoController();
+        ReservasController reserva = new ReservasController();
+        GastoDeptosController gasto = new GastoDeptosController();
+        List<Reserva> lstReserva = new List<Reserva>();
+        List<GastosDepto> lstGastos = new List<GastosDepto>();
+        List<Departamento> lstDepartamentos = new List<Departamento>(); 
         public InformeRentabilidad()
         {
             InitializeComponent();
             dgvInforme.DataSource = info.Refresh();
             dgvInforme2.DataSource = info.Refresh2();
+            CargaZona();
+            GetDeptos();
+            TraeReservas();
+            TraeGastos();
+
         }
+
+        public async Task TraeReservas()
+        {            
+            var com = await reserva.TraerReservas();
+            foreach(var item in com.reserva)
+            {
+                lstReserva.Add(item);
+            }           
+        }
+
+        public async Task TraeGastos()
+        {
+            var com = await gasto.TraerGastosDeptos();
+            foreach (var item in com.gastosDepto)
+            {
+                lstGastos.Add(item);
+            }
+        }
+
+        public async Task CargaZona()
+        {
+            List<Zona> lst = new List<Zona>();
+            var com = await combo.CargarComboBoxZona();
+            foreach (var item in com.Zona)
+            {
+                lst.Add(item);
+            }
+            cmbZona.DataSource = lst;
+            cmbZona.DisplayMember = "descripcion";
+            cmbZona.ValueMember = "id_zona";            
+        }
+
+        private async Task GetDeptos()
+        {
+            List<Departamento> lst = new List<Departamento>();
+            var com = await depto.TraerDepartamentos();
+            foreach (var item in com.Departamentos)
+            {
+                lst.Add(item);
+                lstDepartamentos.Add(item);
+            }
+            cmbDepartamento.DataSource = lst;
+            cmbDepartamento.DisplayMember = "direccion";
+            cmbDepartamento.ValueMember = "id_depto";
+
+        }
+
 
         private void btnVolverDepartamento_Click(object sender, EventArgs e)
         {
@@ -65,7 +127,7 @@ namespace proyecto1
                 }
                 else
                 {
-                    dgvInforme3.DataSource = dt3;
+                  
                 }
             }
             catch (Exception)
@@ -87,7 +149,7 @@ namespace proyecto1
             var inicio = DateTime.Parse(dtpInicio.Value.ToString());
             var fin = DateTime.Parse(dtpHasta.Value.ToString());
 
-            PdfWriter pdfWriter = new PdfWriter("C:\\ReporteRentabilidadTotal.pdf");
+            PdfWriter pdfWriter = new PdfWriter("C:/ReporteRentabilidadTotal.pdf");
             PdfDocument pdf = new PdfDocument(pdfWriter);
             Document documento = new Document(pdf, PageSize.LETTER);
 
@@ -128,7 +190,102 @@ namespace proyecto1
 
         }
 
-       
+        private void button3_Click(object sender, EventArgs e)
+        {
+            List<Reserva> lstReservaFiltrado = new List<Reserva>();
+            List<GastosDepto> lstGastosFiltrado = new List<GastosDepto>();
+            int sumaGatos = 0;
+            int sumaIngresos = 0;           
+            long id = long.Parse(cmbDepartamento.SelectedValue.ToString());
+            foreach (var item in lstReserva)
+            {
+                if(item.id_depto_id == id)
+                {                    
+                    lstReservaFiltrado.Add(item);
+                }
+            }
+            foreach (var item in lstGastos)
+            {
+                if(item.id_depto_id == id)
+                {
+                    lstGastosFiltrado.Add(item);
+                }
+            }
+            dgvInforme.DataSource = lstReservaFiltrado;
+            dgvInforme2.DataSource = lstGastosFiltrado;
+            foreach (var item in lstGastosFiltrado)
+            {
+                sumaGatos += item.valor_pago;
+            }
+            foreach (var item in lstReservaFiltrado)
+            {
+                sumaIngresos += item.valor_total;
+            }
+
+            txtGastos.Text = sumaGatos.ToString();
+            txtIngresos.Text = sumaIngresos.ToString();
+            txtTotalRentable.Text = (sumaIngresos - sumaGatos).ToString();
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            List<Reserva> lstReservaFiltrado = new List<Reserva>();
+            List<GastosDepto> lstGastosFiltrado = new List<GastosDepto>();
+            List<Departamento> lstDeptos = new List<Departamento>();
+            int sumaGatos = 0;
+            int sumaIngresos = 0;
+            long id = long.Parse(cmbZona.SelectedValue.ToString());           
+
+            foreach (var item in lstDepartamentos)
+            {
+                if(item.id_zona_id == id)
+                {
+                    lstDeptos.Add(item);
+                }
+            }
+
+            foreach (var item in lstDeptos)
+            {
+                long idDepto = item.id_depto;
+                foreach (var item2 in lstReserva)
+                {
+                    if (item2.id_depto_id == idDepto)
+                    {
+                        lstReservaFiltrado.Add(item2);
+                        sumaIngresos += item2.valor_total;
+                    }
+                }
+                foreach (var item3 in lstGastos)
+                {
+                    if (item3.id_depto_id == idDepto)
+                    {
+                        lstGastosFiltrado.Add(item3);
+                        sumaGatos += item3.valor_pago;
+                    }
+                }
+
+            }         
+            dgvInforme.DataSource = lstReservaFiltrado;
+            dgvInforme2.DataSource = lstGastosFiltrado;
+            //foreach (var item in lstGastosFiltrado)
+            //{
+            //    sumaGatos += item.valor_pago;
+            //}
+            //foreach (var item in lstReservaFiltrado)
+            //{
+            //    sumaIngresos += item.valor_total;
+            //}
+
+            txtGastos.Text = sumaGatos.ToString();
+            txtIngresos.Text = sumaIngresos.ToString();
+            txtTotalRentable.Text = (sumaIngresos - sumaGatos).ToString();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

@@ -16,9 +16,9 @@ namespace proyecto1
 {
     public partial class IngresarMantencionDepartamentos : Form
     {
-        InformesController info = new InformesController();
+        GastoDeptosController gastoController = new GastoDeptosController();
         ComboBoxsTurismo combo = new ComboBoxsTurismo();
-        Validaciones validar = new Validaciones();
+        Validaciones validar = new Validaciones(); 
         public IngresarMantencionDepartamentos()
         {
             InitializeComponent();
@@ -27,7 +27,19 @@ namespace proyecto1
             CargaDeptos();
         }
 
-
+        private async void getGastos()
+        {
+            List<GastosDepto> lst = new List<GastosDepto>();
+            var com = await gastoController.TraerGastosDeptos();
+            foreach (var item in com.gastosDepto)
+            {
+                if(item.id_empleado_id == LoginUsuario.idEmpleado)
+                {
+                    lst.Add(item);
+                }
+            }
+            dgvInformePago.DataSource = lst;       
+        }
         public async Task CargaMedioDePago()
         {
             List<MedioDePago> lst = new List<MedioDePago>();
@@ -38,7 +50,7 @@ namespace proyecto1
             }
             cmbMedioPago.DataSource = lst;
             cmbMedioPago.DisplayMember = "descripcion";
-            cmbMedioPago.ValueMember = "id_zona";          
+            cmbMedioPago.ValueMember = "id_mp";          
         }
 
         public async Task CargaDeptos()
@@ -49,7 +61,7 @@ namespace proyecto1
             {
                 if(item.id_zona_id == LoginUsuario.idZona)
                 {
-                    lst.Add(item);
+                    lst.Add(item);                  
                 }
             }
             cmbDepartamentos.DataSource = lst;
@@ -99,17 +111,21 @@ namespace proyecto1
             
         }
 
-        private void btnIngresar_Click(object sender, EventArgs e)
+        private async void btnIngresar_Click(object sender, EventArgs e)
         {
 
             long empleado = LoginUsuario.idEmpleado;
-            int departamento = validar.ValidaInt32(cmbDepartamentos.SelectedValue.ToString());
-            int medioPago = validar.ValidaInt32(cmbMedioPago.SelectedValue.ToString());
+            long departamento = long.Parse(cmbDepartamentos.SelectedValue.ToString());
+            long medioPago = long.Parse(cmbMedioPago.SelectedValue.ToString());
             int valorPago = validar.ValidaInt32(txtValorPago.Text);
             string descripcion = txtDescripcion.Text;
             string concepto = ConceptoSeleccionado();
             DateTime fechaPago = DateTime.Parse(dtpFechaPago.Value.ToString());
-            if(concepto == null)
+            string anio = fechaPago.Year.ToString();
+            string mes = fechaPago.Month.ToString();
+            string dia = fechaPago.Day.ToString();
+            string fecha = anio + "-" + mes + "-" + dia;
+            if (concepto == null)
             {
                 MessageBox.Show("Debe seleccionar un Concepto");
             }
@@ -121,11 +137,11 @@ namespace proyecto1
             {
                 try
                 {
-                    bool resp = info.IngresarGastos(departamento, empleado, concepto, descripcion, medioPago, valorPago, fechaPago);
-                    if (resp)
+                    bool resp = await gastoController.IngresarGastoDepto(departamento, empleado, medioPago, concepto, descripcion, valorPago, fecha);
+                    if (!resp)
                     {
                         MessageBox.Show("Se agregó un gasto de Departamento");
-                        dgvInformePago.DataSource = info.mostrarUltimoRegistro();
+                        getGastos();
                     }
                     else
                     {
