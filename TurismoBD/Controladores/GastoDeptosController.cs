@@ -67,17 +67,7 @@ namespace TurismoBD.Controladores
                 var result = response.Content.ReadAsStringAsync().Result;
                 var responseAPI = JsonSerializer.Deserialize<RespuestasApi>(result, joptions);
 
-                //Probando estas respuestar...
-                if (responseAPI.MensajeSalida.Contains("Creado Correctamente"))
-                {
-                    Debug.WriteLine("Gasto eliminado!");
-                    return true;
-                }
-                else
-                {
-                    Debug.WriteLine($"No se ingreso : {response.StatusCode}");
-                    return false;
-                }
+                return false;
 
             }
             catch (Exception ex)

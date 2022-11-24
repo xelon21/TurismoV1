@@ -31,11 +31,14 @@ namespace proyecto1
         {
             List<GastosDepto> lst = new List<GastosDepto>();
             var com = await gastoController.TraerGastosDeptos();
-            foreach (var item in com.gastosDepto)
+            if (com != null)
             {
-                if(item.id_empleado_id == LoginUsuario.idEmpleado)
+                foreach (var item in com.gastosDepto)
                 {
-                    lst.Add(item);
+                    if (item.id_empleado_id == LoginUsuario.idEmpleado)
+                    {
+                        lst.Add(item);
+                    }
                 }
             }
             dgvInformePago.DataSource = lst;       
@@ -44,9 +47,12 @@ namespace proyecto1
         {
             List<MedioDePago> lst = new List<MedioDePago>();
             var com = await combo.CargarMediosDePago();
-            foreach (var item in com.medioDePago)
+            if (com != null)
             {
-                lst.Add(item);
+                foreach (var item in com.medioDePago)
+                {
+                    lst.Add(item);
+                }
             }
             cmbMedioPago.DataSource = lst;
             cmbMedioPago.DisplayMember = "descripcion";
