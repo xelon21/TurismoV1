@@ -70,7 +70,7 @@
             this.panelFormularioDepartamento.Controls.Add(this.label54);
             this.panelFormularioDepartamento.Location = new System.Drawing.Point(12, 12);
             this.panelFormularioDepartamento.Name = "panelFormularioDepartamento";
-            this.panelFormularioDepartamento.Size = new System.Drawing.Size(795, 534);
+            this.panelFormularioDepartamento.Size = new System.Drawing.Size(890, 620);
             this.panelFormularioDepartamento.TabIndex = 21;
             // 
             // panel3
@@ -90,7 +90,7 @@
             this.panel3.Controls.Add(this.dtpFechaPago);
             this.panel3.Location = new System.Drawing.Point(24, 58);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(745, 317);
+            this.panel3.Size = new System.Drawing.Size(834, 357);
             this.panel3.TabIndex = 33;
             // 
             // panel1
@@ -103,7 +103,7 @@
             this.panel1.Controls.Add(this.rdbGas);
             this.panel1.Controls.Add(this.rdbGastosComunes);
             this.panel1.Controls.Add(this.rdbAseo);
-            this.panel1.Location = new System.Drawing.Point(464, 91);
+            this.panel1.Location = new System.Drawing.Point(521, 121);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(230, 111);
             this.panel1.TabIndex = 20;
@@ -187,7 +187,7 @@
             // cmbMedioPago
             // 
             this.cmbMedioPago.FormattingEnabled = true;
-            this.cmbMedioPago.Location = new System.Drawing.Point(173, 78);
+            this.cmbMedioPago.Location = new System.Drawing.Point(146, 99);
             this.cmbMedioPago.Name = "cmbMedioPago";
             this.cmbMedioPago.Size = new System.Drawing.Size(210, 23);
             this.cmbMedioPago.TabIndex = 19;
@@ -195,14 +195,14 @@
             // cmbDepartamentos
             // 
             this.cmbDepartamentos.FormattingEnabled = true;
-            this.cmbDepartamentos.Location = new System.Drawing.Point(173, 49);
+            this.cmbDepartamentos.Location = new System.Drawing.Point(146, 70);
             this.cmbDepartamentos.Name = "cmbDepartamentos";
             this.cmbDepartamentos.Size = new System.Drawing.Size(210, 23);
             this.cmbDepartamentos.TabIndex = 18;
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(173, 144);
+            this.txtDescripcion.Location = new System.Drawing.Point(146, 165);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(218, 67);
@@ -210,7 +210,7 @@
             // 
             // txtValorPago
             // 
-            this.txtValorPago.Location = new System.Drawing.Point(173, 111);
+            this.txtValorPago.Location = new System.Drawing.Point(146, 132);
             this.txtValorPago.Name = "txtValorPago";
             this.txtValorPago.Size = new System.Drawing.Size(100, 23);
             this.txtValorPago.TabIndex = 15;
@@ -218,7 +218,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(74, 81);
+            this.label6.Location = new System.Drawing.Point(47, 102);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(93, 15);
             this.label6.TabIndex = 9;
@@ -227,7 +227,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(78, 52);
+            this.label5.Location = new System.Drawing.Point(51, 73);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(89, 15);
             this.label5.TabIndex = 8;
@@ -236,7 +236,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(92, 144);
+            this.label3.Location = new System.Drawing.Point(65, 165);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 15);
             this.label3.TabIndex = 6;
@@ -245,7 +245,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(98, 114);
+            this.label1.Location = new System.Drawing.Point(71, 135);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 15);
             this.label1.TabIndex = 5;
@@ -253,9 +253,9 @@
             // 
             // btnIngresar
             // 
-            this.btnIngresar.Location = new System.Drawing.Point(312, 248);
+            this.btnIngresar.Location = new System.Drawing.Point(344, 279);
             this.btnIngresar.Name = "btnIngresar";
-            this.btnIngresar.Size = new System.Drawing.Size(135, 23);
+            this.btnIngresar.Size = new System.Drawing.Size(154, 40);
             this.btnIngresar.TabIndex = 4;
             this.btnIngresar.Text = "Ingresar Gasto";
             this.btnIngresar.UseVisualStyleBackColor = true;
@@ -264,7 +264,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(405, 52);
+            this.label2.Location = new System.Drawing.Point(471, 79);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 15);
             this.label2.TabIndex = 3;
@@ -272,7 +272,7 @@
             // 
             // dtpFechaPago
             // 
-            this.dtpFechaPago.Location = new System.Drawing.Point(485, 46);
+            this.dtpFechaPago.Location = new System.Drawing.Point(551, 73);
             this.dtpFechaPago.Name = "dtpFechaPago";
             this.dtpFechaPago.Size = new System.Drawing.Size(200, 23);
             this.dtpFechaPago.TabIndex = 1;
@@ -281,9 +281,9 @@
             // 
             this.panelIngresoDepartamento2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelIngresoDepartamento2.Controls.Add(this.dgvInformePago);
-            this.panelIngresoDepartamento2.Location = new System.Drawing.Point(24, 394);
+            this.panelIngresoDepartamento2.Location = new System.Drawing.Point(24, 421);
             this.panelIngresoDepartamento2.Name = "panelIngresoDepartamento2";
-            this.panelIngresoDepartamento2.Size = new System.Drawing.Size(745, 80);
+            this.panelIngresoDepartamento2.Size = new System.Drawing.Size(834, 137);
             this.panelIngresoDepartamento2.TabIndex = 8;
             // 
             // dgvInformePago
@@ -303,14 +303,14 @@
             this.dgvInformePago.RowHeadersVisible = false;
             this.dgvInformePago.RowTemplate.Height = 25;
             this.dgvInformePago.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvInformePago.Size = new System.Drawing.Size(745, 80);
+            this.dgvInformePago.Size = new System.Drawing.Size(834, 137);
             this.dgvInformePago.TabIndex = 32;
             // 
             // btnVolverDepartamento
             // 
-            this.btnVolverDepartamento.Location = new System.Drawing.Point(24, 493);
+            this.btnVolverDepartamento.Location = new System.Drawing.Point(24, 564);
             this.btnVolverDepartamento.Name = "btnVolverDepartamento";
-            this.btnVolverDepartamento.Size = new System.Drawing.Size(75, 23);
+            this.btnVolverDepartamento.Size = new System.Drawing.Size(98, 35);
             this.btnVolverDepartamento.TabIndex = 5;
             this.btnVolverDepartamento.Text = "Volver";
             this.btnVolverDepartamento.UseVisualStyleBackColor = true;
@@ -320,7 +320,7 @@
             // 
             this.label54.AutoSize = true;
             this.label54.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label54.Location = new System.Drawing.Point(267, 15);
+            this.label54.Location = new System.Drawing.Point(329, 12);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(256, 18);
             this.label54.TabIndex = 0;
@@ -330,7 +330,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(821, 554);
+            this.ClientSize = new System.Drawing.Size(914, 644);
             this.Controls.Add(this.panelFormularioDepartamento);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "IngresarMantencionDepartamentos";
