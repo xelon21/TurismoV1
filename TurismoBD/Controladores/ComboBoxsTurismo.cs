@@ -141,35 +141,61 @@ namespace TurismoBD.Controladores
             }
             return null;
         }
-        public DataTable CargarComboBoxMedioPago()
-        {
-            ConeccionBD connection = new ConeccionBD();
-            var dt = new DataTable();
-            var cmd = new SqlCommand();
-            var cnx = new SqlConnection(connection.Conneccion());
-            SqlDataAdapter da = new SqlDataAdapter("Select id_mp, descripcion from MEDIO_PAGO;", cnx);
-            da.SelectCommand.CommandType = CommandType.Text;
-            da.Fill(dt);
-            return dt;
-        }
 
-        public DataTable CargarComboBoxEmpleado()
+        public async Task<TipoServicioResponse> CargaTipoServicio()
         {
-            ConeccionBD connection = new ConeccionBD();
-            var dt = new DataTable();
-            var cmd = new SqlCommand();
-            var cnx = new SqlConnection(connection.Conneccion());
-            SqlDataAdapter da = new SqlDataAdapter("Select nombre +' '+ apellido as nombre, id_empleado from EMPLEADO;", cnx);
-            da.SelectCommand.CommandType = CommandType.Text;
-            da.Fill(dt);
-            return dt;
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(apiUrl + "tipoServicios/");
+                var a = 0;
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    if (content != string.Empty)
+                    {
+                        var solicitudes = JsonSerializer.Deserialize<TipoServicioResponse>(content, joptions);
+                        return solicitudes;
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine(" Este mensaje algo hace ");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Exception: {ex.Message}");
+            }
+            return null;
         }
     }
 }
 
 
 #region codigo
+//public DataTable CargarComboBoxMedioPago()
+//{
+//    ConeccionBD connection = new ConeccionBD();
+//    var dt = new DataTable();
+//    var cmd = new SqlCommand();
+//    var cnx = new SqlConnection(connection.Conneccion());
+//    SqlDataAdapter da = new SqlDataAdapter("Select id_mp, descripcion from MEDIO_PAGO;", cnx);
+//    da.SelectCommand.CommandType = CommandType.Text;
+//    da.Fill(dt);
+//    return dt;
+//}
 
+//public DataTable CargarComboBoxEmpleado()
+//{
+//    ConeccionBD connection = new ConeccionBD();
+//    var dt = new DataTable();
+//    var cmd = new SqlCommand();
+//    var cnx = new SqlConnection(connection.Conneccion());
+//    SqlDataAdapter da = new SqlDataAdapter("Select nombre +' '+ apellido as nombre, id_empleado from EMPLEADO;", cnx);
+//    da.SelectCommand.CommandType = CommandType.Text;
+//    da.Fill(dt);
+//    return dt;
+//}
 
 //public DataTable CargarComboBoxDepartamento()
 //{

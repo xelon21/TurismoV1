@@ -111,16 +111,7 @@ namespace TurismoBD.Controladores
                 var result = response.Content.ReadAsStringAsync().Result;
                 var responseAPI = JsonSerializer.Deserialize<RespuestasApi>(result, joptions);
 
-                //Probando estas respuestar...
-                if (responseAPI.MensajeSalida.Contains("Creado Correctamente"))
-                {
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine($"No se ingreso : {response.StatusCode}");
-                    return false;
-                }
+                return false;
             }
             catch (Exception ex)
             {
@@ -147,16 +138,7 @@ namespace TurismoBD.Controladores
                 var result = response.Content.ReadAsStringAsync().Result;
                 var responseAPI = JsonSerializer.Deserialize<RespuestasApi>(result, joptions);
 
-                //Probando estas respuestar...
-                if (responseAPI.MensajeSalida.Contains("Creado Correctamente"))
-                {
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine($"No se ingreso : {response.StatusCode}");
-                    return false;
-                }
+                return false;
             }
             catch (Exception ex)
             {
@@ -185,16 +167,7 @@ namespace TurismoBD.Controladores
 
                 var result = response.Content.ReadAsStringAsync().Result;
                 var responseAPI = JsonSerializer.Deserialize<RespuestasApi>(result, joptions);
-
-                //Probando estas respuestar...
-                if (responseAPI.MensajeSalida.Contains("Creado Correctamente"))
-                {                   
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return false;             
             }
             catch (Exception ex)
             {

@@ -79,6 +79,7 @@ namespace proyecto1
             cmbZona.ValueMember = "id_zona";            
         }
 
+
         private async Task GetDeptos()
         {
             List<Departamento> lst = new List<Departamento>();
@@ -100,41 +101,44 @@ namespace proyecto1
             this.Close();
         }
 
+
         private void btnFiltrar_Click(object sender, EventArgs e)
-        {
-            var inicio = DateTime.Parse(dtpInicio.Value.ToString());
-            var fin = DateTime.Parse(dtpHasta.Value.ToString());            
+        {    
+            DateTime inicio = DateTime.Parse(dtpInicio.Value.ToString("yyyy-MM-dd"));
+            DateTime fin = DateTime.Parse(dtpHasta.Value.ToString("yyyy-MM-dd"));  
+            List<Reserva> lstReservaFiltrado = new List<Reserva>();
+            List<GastosDepto> lstGastosFiltrado = new List<GastosDepto>();
+            int sumaGatos = 0;
+            int sumaIngresos = 0;
             try
-            {                
-                DataTable dt = info.FiltrarIngresos(inicio, fin);
-                if(dt.Rows.Count == 0)
+            {
+                foreach (var item in lstGastos)
                 {
-                    MessageBox.Show("No se encontraron registros");
-                }
-                else
-                {
-                    dgvInforme.DataSource = dt;
-                }
-
-                DataTable dt2 = info.FiltrarEgresos(inicio, fin);
-                if (dt2.Rows.Count == 0)
-                {
-                    MessageBox.Show("No se encontraron registros");
-                }
-                else
-                {
-                    dgvInforme2.DataSource = dt2;
+                    DateTime cambio = DateTime.Parse(item.fecha_pago);
+                    if(cambio >= inicio && cambio <= fin)
+                    {
+                        lstGastosFiltrado.Add(item);
+                        sumaGatos += item.valor_pago;
+                    }
                 }
 
-                DataTable dt3 = info.FiltraTotalIngresosEgresos(inicio, fin);
-                if (dt3.Rows.Count == 0)
+                foreach (var item in lstReserva)
                 {
-                    MessageBox.Show("No se encontraron registros");
+                    DateTime cambio = DateTime.Parse(item.f_checkin);
+                    if (cambio >= inicio && cambio <= fin)
+                    {
+                        lstReservaFiltrado.Add(item);
+                        sumaIngresos += item.valor_total;
+                    }
                 }
-                else
-                {
-                  
-                }
+
+                dgvInforme.DataSource = lstReservaFiltrado;
+                dgvInforme2.DataSource = lstGastosFiltrado;
+
+                txtGastos.Text = sumaGatos.ToString();
+                txtIngresos.Text = sumaIngresos.ToString();
+                txtTotalRentable.Text = (sumaIngresos - sumaGatos).ToString();
+
             }
             catch (Exception)
             {
@@ -295,6 +299,37 @@ namespace proyecto1
     }
 }
 
+
+
+//DataTable dt = info.FiltrarIngresos(inicio, fin);
+//if(dt.Rows.Count == 0)
+//{
+//    MessageBox.Show("No se encontraron registros");
+//}
+//else
+//{
+//    dgvInforme.DataSource = dt;
+//}
+
+//DataTable dt2 = info.FiltrarEgresos(inicio, fin);
+//if (dt2.Rows.Count == 0)
+//{
+//    MessageBox.Show("No se encontraron registros");
+//}
+//else
+//{
+//    dgvInforme2.DataSource = dt2;
+//}
+
+//DataTable dt3 = info.FiltraTotalIngresosEgresos(inicio, fin);
+//if (dt3.Rows.Count == 0)
+//{
+//    MessageBox.Show("No se encontraron registros");
+//}
+//else
+//{
+
+//}
 
 
 //var parrafo = new Paragraph("---------------------------------------------------------\n" +

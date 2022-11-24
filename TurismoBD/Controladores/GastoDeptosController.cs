@@ -66,7 +66,6 @@ namespace TurismoBD.Controladores
 
                 var result = response.Content.ReadAsStringAsync().Result;
                 var responseAPI = JsonSerializer.Deserialize<RespuestasApi>(result, joptions);
-
                 return false;
 
             }
