@@ -30,18 +30,20 @@ namespace proyecto1
         private async void getGastos()
         {
             List<GastosDepto> lst = new List<GastosDepto>();
+            
             var com = await gastoController.TraerGastosDeptos();
-            if (com != null)
+            foreach (var item in com.gastosDepto)
             {
-                foreach (var item in com.gastosDepto)
+               
+                if (item.id_empleado_id == LoginUsuario.idEmpleado)
                 {
-                    if (item.id_empleado_id == LoginUsuario.idEmpleado)
-                    {
-                        lst.Add(item);
-                    }
+                    lst.Add(item);
                 }
+                
             }
-            dgvInformePago.DataSource = lst;       
+
+            dgvInformePago.DataSource = lst;
+            
         }
         public async Task CargaMedioDePago()
         {
@@ -62,19 +64,34 @@ namespace proyecto1
         public async Task CargaDeptos()
         {
             List<Departamento> lst = new List<Departamento>();
+            List<Departamento> lstAdmin = new List<Departamento>();
             var com = await combo.CargarComboDeptos();
-            if ( com != null)
+            foreach (var item in com.Departamentos)
             {
-                foreach (var item in com.Departamentos)
+                if (LoginUsuario.rol == 1)
                 {
-                    if (item.id_zona_id == LoginUsuario.idZona)
-                    {
-                        lst.Add(item);
-                    }
+                    lstAdmin.Add(item);
                 }
-            }            cmbDepartamentos.DataSource = lst;
-            cmbDepartamentos.DisplayMember = "direccion";
-            cmbDepartamentos.ValueMember = "id_depto";
+                else if (item.id_zona_id == LoginUsuario.idZona)
+                {
+                    lst.Add(item);                  
+                }
+            }
+
+            if (LoginUsuario.rol == 1)
+            {
+               
+                cmbDepartamentos.DataSource = lstAdmin;
+                cmbDepartamentos.DisplayMember = "direccion";
+                cmbDepartamentos.ValueMember = "id_depto";
+            }
+            else
+            {               
+                cmbDepartamentos.DataSource = lst;
+                cmbDepartamentos.DisplayMember = "direccion";
+                cmbDepartamentos.ValueMember = "id_depto";
+            }
+            
         }
 
 

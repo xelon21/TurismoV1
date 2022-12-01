@@ -18,14 +18,14 @@ namespace TurismoBD.Controladores
         public GastoDeptosController()
         {
             httpClient = new HttpClient();
-            apiUrl = "http://localhost:8000/api/gastoDeptos/";
+            apiUrl = "http://localhost:8000/api/";
             joptions = new JsonSerializerOptions();
         }
         public async Task<GastosDeptoResponse> TraerGastosDeptos()
         {
             try
             {
-                HttpResponseMessage response = await httpClient.GetAsync(apiUrl);
+                HttpResponseMessage response = await httpClient.GetAsync(apiUrl + "gastoDeptos/");
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
@@ -62,7 +62,63 @@ namespace TurismoBD.Controladores
                 string jsonDepto = JsonSerializer.Serialize(gastoDepto, joptions);
                 StringContent content = new StringContent(jsonDepto, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = await httpClient.PostAsync(apiUrl, content);
+                HttpResponseMessage response = await httpClient.PostAsync(apiUrl + "gastoDeptos/", content);
+
+                var result = response.Content.ReadAsStringAsync().Result;
+                var responseAPI = JsonSerializer.Deserialize<RespuestasApi>(result, joptions);
+                return false;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Hubo un error {ex.Message}");
+                return false;
+            }
+
+
+        }
+
+        public async Task<PagoSueldoResponse> TraePagoSueldos()
+        {
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(apiUrl + "pagoSueldos/");
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    if (content != string.Empty)
+                    {
+                        var solicitudes = JsonSerializer.Deserialize<PagoSueldoResponse>(content, joptions);
+                        var dato = content.ToString();
+                        return solicitudes;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Exception: {ex.Message}");
+            }
+            return null;
+        }
+
+        public async Task<bool> IngresarPagoSueldo(long idZona, long idEmpleado, long medioPago, string descripcion, int valorPago, string fecha)
+        {
+            PagoSueldo pagoSueldo = new PagoSueldo()
+            {
+                id_zona_id = idZona,
+                id_empleado_id = idEmpleado,
+                id_medio_pago_id = medioPago,      
+                descripcion = descripcion,
+                valor_pago = valorPago,
+                fecha_pago = fecha
+            };
+
+            try
+            {
+                string jsonDepto = JsonSerializer.Serialize(pagoSueldo, joptions);
+                StringContent content = new StringContent(jsonDepto, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await httpClient.PostAsync(apiUrl + "pagoSueldos/", content);
 
                 var result = response.Content.ReadAsStringAsync().Result;
                 var responseAPI = JsonSerializer.Deserialize<RespuestasApi>(result, joptions);

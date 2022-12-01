@@ -25,7 +25,7 @@ namespace TurismoBD.Controladores
             apiUrl = "http://localhost:8000/api/";
             joptions = new JsonSerializerOptions();
         }
-      
+
         public async Task<string> GetHttpZona()
         {
             WebRequest oRequest = WebRequest.Create(apiUrl);
@@ -35,10 +35,10 @@ namespace TurismoBD.Controladores
         }
 
         public async Task<ZonaResponse> CargarComboBoxZona()
-        {           
+        {
             try
             {
-                HttpResponseMessage response = await httpClient.GetAsync(apiUrl+"zonas/");
+                HttpResponseMessage response = await httpClient.GetAsync(apiUrl + "zonas/");
                 var a = 0;
                 if (response.IsSuccessStatusCode)
                 {
@@ -65,7 +65,7 @@ namespace TurismoBD.Controladores
         {
             try
             {
-                HttpResponseMessage response = await httpClient.GetAsync(apiUrl+"categorias/");
+                HttpResponseMessage response = await httpClient.GetAsync(apiUrl + "categorias/");
                 var a = 0;
                 if (response.IsSuccessStatusCode)
                 {
@@ -154,6 +154,33 @@ namespace TurismoBD.Controladores
                     if (content != string.Empty)
                     {
                         var solicitudes = JsonSerializer.Deserialize<TipoServicioResponse>(content, joptions);
+                        return solicitudes;
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine(" Este mensaje algo hace ");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Exception: {ex.Message}");
+            }
+            return null;
+        }
+
+        public async Task<TipoUsuarioResponse> CargaTipoUsuario()
+        {
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(apiUrl + "tipoUsuarios/");
+                var a = 0;
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    if (content != string.Empty)
+                    {
+                        var solicitudes = JsonSerializer.Deserialize<TipoUsuarioResponse>(content, joptions);
                         return solicitudes;
                     }
                 }

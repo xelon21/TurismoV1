@@ -31,9 +31,9 @@ namespace proyecto1
         {
             this.panelInformacionReserva = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.lblDepartamento = new System.Windows.Forms.Label();
+            this.lblCheckout = new System.Windows.Forms.Label();
+            this.lblCheckin = new System.Windows.Forms.Label();
             this.lblValorRestante = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -67,9 +67,9 @@ namespace proyecto1
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.label15);
-            this.panel4.Controls.Add(this.label14);
-            this.panel4.Controls.Add(this.label13);
+            this.panel4.Controls.Add(this.lblDepartamento);
+            this.panel4.Controls.Add(this.lblCheckout);
+            this.panel4.Controls.Add(this.lblCheckin);
             this.panel4.Controls.Add(this.lblValorRestante);
             this.panel4.Controls.Add(this.label11);
             this.panel4.Controls.Add(this.label10);
@@ -85,41 +85,41 @@ namespace proyecto1
             this.panel4.Size = new System.Drawing.Size(312, 319);
             this.panel4.TabIndex = 7;
             // 
-            // label15
+            // lblDepartamento
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(172, 115);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(25, 15);
-            this.label15.TabIndex = 17;
-            this.label15.Text = "351";
+            this.lblDepartamento.AutoSize = true;
+            this.lblDepartamento.Location = new System.Drawing.Point(172, 115);
+            this.lblDepartamento.Name = "lblDepartamento";
+            this.lblDepartamento.Size = new System.Drawing.Size(68, 15);
+            this.lblDepartamento.TabIndex = 17;
+            this.lblDepartamento.Text = "Cargando...";
             // 
-            // label14
+            // lblCheckout
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(172, 91);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(98, 15);
-            this.label14.TabIndex = 16;
-            this.label14.Text = "5 Dias / 4 Noches";
+            this.lblCheckout.AutoSize = true;
+            this.lblCheckout.Location = new System.Drawing.Point(172, 91);
+            this.lblCheckout.Name = "lblCheckout";
+            this.lblCheckout.Size = new System.Drawing.Size(68, 15);
+            this.lblCheckout.TabIndex = 16;
+            this.lblCheckout.Text = "Cargando...";
             // 
-            // label13
+            // lblCheckin
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(172, 65);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(101, 15);
-            this.label13.TabIndex = 15;
-            this.label13.Text = "10/04/2022 : 10:00";
+            this.lblCheckin.AutoSize = true;
+            this.lblCheckin.Location = new System.Drawing.Point(172, 65);
+            this.lblCheckin.Name = "lblCheckin";
+            this.lblCheckin.Size = new System.Drawing.Size(68, 15);
+            this.lblCheckin.TabIndex = 15;
+            this.lblCheckin.Text = "Cargando...";
             // 
             // lblValorRestante
             // 
             this.lblValorRestante.AutoSize = true;
             this.lblValorRestante.Location = new System.Drawing.Point(172, 140);
             this.lblValorRestante.Name = "lblValorRestante";
-            this.lblValorRestante.Size = new System.Drawing.Size(76, 15);
+            this.lblValorRestante.Size = new System.Drawing.Size(68, 15);
             this.lblValorRestante.TabIndex = 14;
-            this.lblValorRestante.Text = "CLP: $175000";
+            this.lblValorRestante.Text = "Cargando...";
             // 
             // label11
             // 
@@ -197,9 +197,10 @@ namespace proyecto1
             this.lblHuesped.AutoSize = true;
             this.lblHuesped.Location = new System.Drawing.Point(172, 12);
             this.lblHuesped.Name = "lblHuesped";
-            this.lblHuesped.Size = new System.Drawing.Size(110, 15);
+            this.lblHuesped.Size = new System.Drawing.Size(68, 15);
             this.lblHuesped.TabIndex = 6;
-            this.lblHuesped.Text = "Juan Carlos Catalan";
+            this.lblHuesped.Text = "Cargando...";
+            this.lblHuesped.Click += new System.EventHandler(this.lblHuesped_Click);
             // 
             // btnVolver
             // 
@@ -253,9 +254,9 @@ namespace proyecto1
 
         private System.Windows.Forms.Panel panelInformacionReserva;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lblDepartamento;
+        private System.Windows.Forms.Label lblCheckout;
+        private System.Windows.Forms.Label lblCheckin;
         private System.Windows.Forms.Label lblValorRestante;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;

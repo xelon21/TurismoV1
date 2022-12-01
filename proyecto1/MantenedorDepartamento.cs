@@ -39,6 +39,29 @@ namespace proyecto1
             panelModificarDepartamento.Hide();
             panelModificarDepartamento2.Hide();
 
+
+            //dgvDepartamentos.Columns.Add("ID", "ID");
+            //dgvDepartamentos.Columns.Add("Direccion", "Direccion");
+            //dgvDepartamentos.Columns.Add("Valor Noche", "Valor Noche");
+            //dgvDepartamentos.Columns.Add("Zona", "Zona");
+            //dgvDepartamentos.Columns.Add("Metros Cuadrados", "Metros Cuadrados");
+            //dgvDepartamentos.Columns.Add("Url Imagen", "Url Imagen");
+            //dgvDepartamentos.Columns.Add("Descripcion", "Descripcion");
+            //dgvDepartamentos.Columns.Add("Capacidad", "Capacidad");
+            //dgvDepartamentos.Columns.Add("Cantidad Baños", "Cantidad Baños");
+            //dgvDepartamentos.Columns.Add("Cantidad Camas", "Cantidad Camas");
+
+            //dgvDepartamentos2.Columns.Add("ID", "ID");
+            //dgvDepartamentos2.Columns.Add("Direccion", "Direccion");
+            //dgvDepartamentos2.Columns.Add("Valor Noche", "Valor Noche");
+            //dgvDepartamentos2.Columns.Add("Zona", "Zona");
+            //dgvDepartamentos2.Columns.Add("Metros Cuadrados", "Metros Cuadrados");
+            //dgvDepartamentos2.Columns.Add("Url Imagen", "Url Imagen");
+            //dgvDepartamentos2.Columns.Add("Descripcion", "Descripcion");
+            //dgvDepartamentos2.Columns.Add("Capacidad", "Capacidad");
+            //dgvDepartamentos2.Columns.Add("Cantidad Baños", "Cantidad Baños");
+            //dgvDepartamentos2.Columns.Add("Cantidad Camas", "Cantidad Camas");
+
             CargaZona();
             GetDeptos();
 
@@ -63,18 +86,60 @@ namespace proyecto1
 
         private async void GetDeptos()
         {
+
+            //int indiceFila = dgvDepartamentos.Rows.Add();
+            //int indiceFila2 = dgvDepartamentos2.Rows.Add();
+            //// int indiceFila3 = dgvInventario3.Rows.Add();
+            //DataGridViewRow fila = dgvDepartamentos.Rows[indiceFila];
+            //DataGridViewRow fila2 = dgvDepartamentos2.Rows[indiceFila2];
+
             List<Departamento> lst = new List<Departamento>();
             var com = await departamentos.TraerDepartamentos();
-            if (com != null)
+           // var com2 = await combo.CargarComboBoxZona();
+            if(com == null)
+            {
+                MessageBox.Show("No se encontraron registros");
+            }
+            else
             {
                 foreach (var item in com.Departamentos)
-                {
+                {               
+
+                    //fila.Cells["ID"].Value = item.id_depto.ToString();
+                    //fila.Cells["Direccion"].Value = item.direccion.ToString();
+                    //fila.Cells["Valor Noche"].Value = item.valor_noche.ToString();               
+                    //fila.Cells["Metros Cuadrados"].Value = item.m2.ToString();
+                    //fila.Cells["Url Imagen"].Value = item.imagen_url.ToString();
+                    //fila.Cells["Descripcion"].Value = item.descripcion.ToString();
+                    //fila.Cells["Capacidad"].Value = item.capacidad.ToString();
+                    //fila.Cells["Cantidad Baños"].Value = item.q_banos.ToString();
+                    //fila.Cells["Cantidad Camas"].Value = item.q_plazas.ToString();
+
+                    //fila2.Cells["ID"].Value = item.id_depto.ToString();
+                    //fila2.Cells["Direccion"].Value = item.direccion.ToString();
+                    //fila2.Cells["Valor Noche"].Value = item.valor_noche.ToString();
+                    //fila2.Cells["Metros Cuadrados"].Value = item.m2.ToString();
+                    //fila2.Cells["Url Imagen"].Value = item.imagen_url.ToString();
+                    //fila2.Cells["Descripcion"].Value = item.descripcion.ToString();
+                    //fila2.Cells["Capacidad"].Value = item.capacidad.ToString();
+                    //fila2.Cells["Cantidad Baños"].Value = item.q_banos.ToString();
+                    //fila2.Cells["Cantidad Camas"].Value = item.q_plazas.ToString();
+
+                    //foreach (var item2 in com2.Zona)
+                    //{
+                    //    if(item.id_zona_id == item2.id_zona)
+                    //    {
+                    //        fila.Cells["Zona"].Value = item2.descripcion.ToString();
+                    //        fila2.Cells["Zona"].Value = item2.descripcion.ToString();
+                    //    }
+                    //}
+                              
                     lst.Add(item);
-                }
-            }             
-            dgvDepartamentos.DataSource = lst;
-            dgvDepartamentos2.DataSource = lst;
-            dgvDepartamentos3.DataSource = lst;
+                }                       
+                dgvDepartamentos.DataSource = lst;
+                dgvDepartamentos2.DataSource = lst;
+                dgvDepartamentos3.DataSource = lst;
+            }
         }
 
 
@@ -258,6 +323,11 @@ namespace proyecto1
         }
 
         private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelModificarDepartamento2_Paint(object sender, PaintEventArgs e)
         {
 
         }

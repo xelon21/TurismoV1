@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using TurismoBD.Controladores;
 using static Microsoft.AspNetCore.Razor.Language.TagHelperMetadata;
 using TurismoBD.Entidades;
+using TurismoBD.Helpers;
 
 namespace proyecto1
 {
@@ -27,19 +28,54 @@ namespace proyecto1
         DepartamentoController depto = new DepartamentoController();
         ReservasController reserva = new ReservasController();
         GastoDeptosController gasto = new GastoDeptosController();
+        ServicioExtraController serv = new ServicioExtraController();
+        Validaciones valida = new Validaciones();
+
+        List<DetalleServicio> detServ = new List<DetalleServicio>();
         List<Reserva> lstReserva = new List<Reserva>();
         List<GastosDepto> lstGastos = new List<GastosDepto>();
-        List<Departamento> lstDepartamentos = new List<Departamento>(); 
+        List<Departamento> lstDepartamentos = new List<Departamento>();
+        List<DetalleServicioReserva> detServiciosReserva = new List<DetalleServicioReserva>();
+        List<ServiciosExtra> lstServiciosExtra = new List<ServiciosExtra>();
         public InformeRentabilidad()
         {
             InitializeComponent();
-            //dgvInforme.DataSource = info.Refresh();
-            //dgvInforme2.DataSource = info.Refresh2();
+ 
             CargaZona();
             GetDeptos();
             TraeReservas();
             TraeGastos();
+            TraeDetServ();
+            TraeServiciosExtra();
+            TraeDetalleServicioReservas();
 
+        }
+
+        public async Task TraeDetServ()
+        {
+            var com = await serv.TraeDetalleServicio();
+            foreach (var item in com.detalleServicio)
+            {
+                detServ.Add(item);
+            }
+        }
+
+        public async Task TraeServiciosExtra()
+        {
+            var com = await serv.TraeServiciosExtras();
+            foreach (var item in com.servicioExtra)
+            {
+                lstServiciosExtra.Add(item);
+            }
+        }
+
+        public async Task TraeDetalleServicioReservas()
+        {
+            var com = await reserva.TraerDetalleServicioReserva();
+            foreach (var item in com.detalleServicioReserva)
+            {
+                detServiciosReserva.Add(item);
+            }
         }
 
         public async Task TraeReservas()
@@ -113,30 +149,88 @@ namespace proyecto1
             DateTime inicio = DateTime.Parse(dtpInicio.Value.ToString("yyyy-MM-dd"));
             DateTime fin = DateTime.Parse(dtpHasta.Value.ToString("yyyy-MM-dd"));  
             List<Reserva> lstReservaFiltrado = new List<Reserva>();
-            List<GastosDepto> lstGastosFiltrado = new List<GastosDepto>();
+            List<GastosDepto> lstGastosFiltrado = new List<GastosDepto>();           
             int sumaGatos = 0;
             int sumaIngresos = 0;
+            int porcentajeGasto = 0;
+            int porcentajeIngreso = 0;
             try
-            {
+          {
                 foreach (var item in lstGastos)
                 {
                     DateTime cambio = DateTime.Parse(item.fecha_pago);
                     if(cambio >= inicio && cambio <= fin)
                     {
-                        lstGastosFiltrado.Add(item);
-                        sumaGatos += item.valor_pago;
+                        if(item.id_depto_id == 4)
+                        {
+                            lstGastosFiltrado.Add(item);
+                            sumaGatos += item.valor_pago;
+                        }
                     }
                 }
 
                 foreach (var item in lstReserva)
                 {
+                    if(item.id_estado_id == 4)
+                    {
+                        foreach (var item2 in lstGastosFiltrado)
+                        {
+                            if (item.id_depto_id == item2.id_depto_id)
+                            {
+                                foreach (var item3 in detServiciosReserva)
+                                {
+                                    if (item.id_reserva == item3.id_reserva_id)
+                                    {
+                                        foreach (var item4 in lstServiciosExtra)
+                                        {
+                                            if (item3.id_servicio_id == item4.id_servicio)
+                                            {
+                                                porcentajeGasto = 0;
+                                                porcentajeGasto = Convert.ToInt32(item4.tarifa * 0.3);
+                                                sumaGatos += porcentajeGasto;
+                                            }                                        
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                foreach (var item in lstReserva)
+                {
                     DateTime cambio = DateTime.Parse(item.f_checkin);
                     if (cambio >= inicio && cambio <= fin)
                     {
-                        lstReservaFiltrado.Add(item);
-                        sumaIngresos += item.valor_total;
+                        if(item.id_estado_id == 4)
+                        {
+                            lstReservaFiltrado.Add(item);
+                            sumaIngresos += item.valor_total;
+                        }
+                    }                        
+                }
+
+                foreach (var item in lstReservaFiltrado)
+                {
+                    if(item.id_estado_id == 4)
+                    {
+                        foreach (var item2 in detServiciosReserva)
+                        {
+                            if (item.id_reserva == item2.id_reserva_id)
+                            {
+                                foreach (var item3 in lstServiciosExtra)
+                                {
+                                    if (item3.id_servicio == item2.id_servicio_id)
+                                    {
+                                        porcentajeIngreso = 0;
+                                        porcentajeIngreso = Convert.ToInt32(item3.tarifa * 0.7);
+                                        sumaIngresos += porcentajeIngreso;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
+               
 
                 dgvInforme.DataSource = lstReservaFiltrado;
                 dgvInforme2.DataSource = lstGastosFiltrado;
@@ -156,7 +250,8 @@ namespace proyecto1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            CrearPDF();
+            // CrearPDF();
+            MessageBox.Show("Opcion No valida");
         }
 
         public void CrearPDF()
@@ -181,9 +276,9 @@ namespace proyecto1
             Table tabla = new Table(UnitValue.CreatePercentArray(tamanios));
             tabla.SetWidth(UnitValue.CreatePercentValue(100)); 
 
-            DataTable dtingreso = info.TotalIngreso(inicio, fin);
-            DataTable dtegreso = info.TotalEgreso(inicio, fin);
-            DataTable dtrenta = info.FiltraTotalIngresosEgresos(inicio, fin);
+            //DataTable dtingreso = info.TotalIngreso(inicio, fin);
+            //DataTable dtegreso = info.TotalEgreso(inicio, fin);
+       //     DataTable dtrenta = info.FiltraTotalIngresosEgresos(inicio, fin);
 
             //tabla.AddHeaderCell(new Cell().Add(new Paragraph("RENTABILIDAD TOTAL").SetFont(fontColumnas)));
 
@@ -192,9 +287,9 @@ namespace proyecto1
                 tabla.AddHeaderCell(new Cell().Add(new Paragraph(columna).SetFont(fontColumnas)));
             }
 
-            tabla.AddCell(new Cell().Add(new Paragraph(dtingreso.Rows[0][0].ToString()).SetFont(fontContenido)));
-            tabla.AddCell(new Cell().Add(new Paragraph(dtegreso.Rows[0][0].ToString()).SetFont(fontContenido)));
-            tabla.AddCell(new Cell().Add(new Paragraph(dtrenta.Rows[0][0].ToString()).SetFont(fontContenido)));     
+            //tabla.AddCell(new Cell().Add(new Paragraph(dtingreso.Rows[0][0].ToString()).SetFont(fontContenido)));
+            //tabla.AddCell(new Cell().Add(new Paragraph(dtegreso.Rows[0][0].ToString()).SetFont(fontContenido)));
+     //       tabla.AddCell(new Cell().Add(new Paragraph(dtrenta.Rows[0][0].ToString()).SetFont(fontContenido)));     
             
             documento.Add(tabla); 
             documento.Close();
@@ -211,7 +306,9 @@ namespace proyecto1
             List<Reserva> lstReservaFiltrado = new List<Reserva>();
             List<GastosDepto> lstGastosFiltrado = new List<GastosDepto>();
             int sumaGatos = 0;
-            int sumaIngresos = 0;           
+            int sumaIngresos = 0;
+            int porcentajeGasto = 0;
+            int porcentajeIngreso = 0;
             long id = long.Parse(cmbDepartamento.SelectedValue.ToString());
             foreach (var item in lstReserva)
             {
@@ -220,6 +317,29 @@ namespace proyecto1
                     lstReservaFiltrado.Add(item);
                 }
             }
+
+            foreach (var item2 in lstReservaFiltrado)
+            {
+                if(item2.id_estado_id == 4)
+                {
+                    foreach (var item3 in detServiciosReserva)
+                    {
+                        if (item2.id_reserva == item3.id_reserva_id)
+                        {
+                            foreach (var item4 in lstServiciosExtra)
+                            {
+                                if (item4.id_servicio == item3.id_servicio_id)
+                                {
+                                    porcentajeIngreso = 0;
+                                    porcentajeIngreso = Convert.ToInt32(item4.tarifa * 0.7);
+                                    sumaIngresos += porcentajeIngreso;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             foreach (var item in lstGastos)
             {
                 if(item.id_depto_id == id)
@@ -230,12 +350,40 @@ namespace proyecto1
             dgvInforme.DataSource = lstReservaFiltrado;
             dgvInforme2.DataSource = lstGastosFiltrado;
             foreach (var item in lstGastosFiltrado)
-            {
+            {               
                 sumaGatos += item.valor_pago;
             }
             foreach (var item in lstReservaFiltrado)
             {
                 sumaIngresos += item.valor_total;
+            }
+
+            foreach (var item2 in lstReserva)
+            {
+                if(item2.id_estado_id == 4)
+                {
+                    foreach (var item3 in lstGastosFiltrado)
+                    {
+                        if (item2.id_depto_id == item3.id_depto_id)
+                        {
+                            foreach (var item4 in detServiciosReserva)
+                            {
+                                if (item2.id_reserva == item4.id_reserva_id)
+                                {
+                                    foreach (var item5 in lstServiciosExtra)
+                                    {
+                                        if (item4.id_servicio_id == item5.id_servicio)
+                                        {
+                                            porcentajeGasto = 0;
+                                            porcentajeGasto = Convert.ToInt32(item5.tarifa * 0.3);
+                                            sumaGatos += porcentajeGasto;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
             txtGastos.Text = sumaGatos.ToString();
@@ -251,6 +399,8 @@ namespace proyecto1
             List<Departamento> lstDeptos = new List<Departamento>();
             int sumaGatos = 0;
             int sumaIngresos = 0;
+            int porcentajeGasto = 0;
+            int porcentajeIngreso = 0;
             long id = long.Parse(cmbZona.SelectedValue.ToString());           
 
             foreach (var item in lstDepartamentos)
@@ -266,18 +416,72 @@ namespace proyecto1
                 long idDepto = item.id_depto;
                 foreach (var item2 in lstReserva)
                 {
-                    if (item2.id_depto_id == idDepto)
+                    if(item2.id_estado_id == 4)
                     {
-                        lstReservaFiltrado.Add(item2);
-                        sumaIngresos += item2.valor_total;
+                        if (item2.id_depto_id == idDepto)
+                        {
+                            lstReservaFiltrado.Add(item2);
+                            sumaIngresos += item2.valor_total;
+                        }
                     }
                 }
-                foreach (var item3 in lstGastos)
+
+                foreach (var item2 in lstReservaFiltrado)
                 {
+                    if(item2.id_estado_id == 4)
+                    {
+                        foreach (var item3 in detServiciosReserva)
+                        {
+                            if (item2.id_reserva == item3.id_reserva_id)
+                            {
+                                foreach (var item4 in lstServiciosExtra)
+                                {
+                                    if (item4.id_servicio == item3.id_servicio_id)
+                                    {
+                                        porcentajeIngreso = 0;
+                                        porcentajeIngreso = Convert.ToInt32(item4.tarifa * 0.7);
+                                        sumaIngresos += porcentajeIngreso;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                foreach (var item3 in lstGastos)
+                {                    
                     if (item3.id_depto_id == idDepto)
                     {
                         lstGastosFiltrado.Add(item3);
                         sumaGatos += item3.valor_pago;
+                    }
+                }
+
+                foreach (var item2 in lstReserva)
+                {
+                    if(item2.id_estado_id == 4)
+                    {
+                        foreach (var item3 in lstGastosFiltrado)
+                        {
+                            if (item2.id_depto_id == item3.id_depto_id)
+                            {
+                                foreach (var item4 in detServiciosReserva)
+                                {
+                                    if (item2.id_reserva == item4.id_reserva_id)
+                                    {
+                                        foreach (var item5 in lstServiciosExtra)
+                                        {
+                                            if (item4.id_servicio_id == item5.id_servicio)
+                                            {
+                                                porcentajeGasto = 0;
+                                                porcentajeGasto = Convert.ToInt32(item5.tarifa * 0.3);
+                                                sumaGatos += porcentajeGasto;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
 

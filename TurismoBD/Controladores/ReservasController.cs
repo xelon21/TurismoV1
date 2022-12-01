@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -19,20 +20,108 @@ namespace TurismoBD.Controladores
         public ReservasController()
         {
             httpClient = new HttpClient();
-            apiUrl = "http://localhost:8000/api/reservas/";
+            apiUrl = "http://localhost:8000/api/";
             joptions = new JsonSerializerOptions();
         }
         public async Task<ReservaResponse> TraerReservas()
         {
             try
             {
-                HttpResponseMessage response = await httpClient.GetAsync(apiUrl);
+                HttpResponseMessage response = await httpClient.GetAsync(apiUrl + "reservas/");
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
                     if (content != string.Empty)
                     {
                         var solicitudes = JsonSerializer.Deserialize<ReservaResponse>(content, joptions);
+                        var dato = content.ToString();
+                        return solicitudes;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Exception: {ex.Message}");
+            }
+            return null;
+        }
+
+        public async Task<HuespedResponse> TraeHuespedes()
+        {
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(apiUrl + "huespedes/");
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    if (content != string.Empty)
+                    {
+                        var solicitudes = JsonSerializer.Deserialize<HuespedResponse>(content, joptions);
+                        var dato = content.ToString();
+                        return solicitudes;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Exception: {ex.Message}");
+            }
+            return null;
+        }
+
+
+        //static async Task<Reserva> UpdateProductAsync(Reserva product)
+        //{
+        //    HttpResponseMessage response = await client.PutAsJsonAsync(
+        //        $"api/products/{product.Id}", product);
+        //    response.EnsureSuccessStatusCode();
+
+        //    // Deserialize the updated product from the response body.
+        //    product = await response.Content.ReadAsAsync<Product>();
+        //    return product;
+        //}
+        public async Task<bool> CambiarEstadoReserva(long idReserva, string checkin, string checkout, long idHuesped, int valorReserva, int valorTotal, long idEstado, long idDepto)
+        {
+            Reserva reserva = new Reserva()
+            {
+                f_checkin = checkin,
+                f_checkout = checkout,
+                id_huesped_id = idHuesped,
+                valor_reserva = valorReserva,
+                valor_total = valorTotal, 
+                id_estado_id = idEstado,
+                id_depto_id = idDepto
+            };
+
+            try
+            {
+                string jsonArticulo = JsonSerializer.Serialize(reserva, joptions);
+                HttpContent content = new StringContent(jsonArticulo, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await httpClient.PutAsync(apiUrl + "reservas/" + idReserva, content);
+
+                var result = response.Content.ReadAsStringAsync().Result;
+               // var responseAPI = JsonSerializer.Deserialize<RespuestasApi>(result, joptions);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Hubo un error {ex.Message}");
+                return false;
+            }
+        }
+
+        public async Task<DetalleServicioReservaResponse> TraerDetalleServicioReserva()
+        {
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(apiUrl + "detServicios/");
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    if (content != string.Empty)
+                    {
+                        var solicitudes = JsonSerializer.Deserialize<DetalleServicioReservaResponse>(content, joptions);
                         var dato = content.ToString();
                         return solicitudes;
                     }

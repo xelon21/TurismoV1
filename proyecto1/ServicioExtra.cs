@@ -59,14 +59,17 @@ namespace proyecto1
         {
             List<ServiciosExtra> lst = new List<ServiciosExtra>();
             var com = await serv.TraeServiciosExtras();
-            if (com != null)
+            if(com == null)
+            {
+                MessageBox.Show("No se encontraron registros");
+            }else
             {
                 foreach (var item in com.servicioExtra)
                 {
                     lst.Add(item);
                 }
+                dgvServicioExtra.DataSource = lst;
             }
-            dgvServicioExtra.DataSource = lst;
         }
 
         private void btnVolverDepartamento_Click(object sender, EventArgs e)

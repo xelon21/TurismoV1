@@ -24,6 +24,7 @@ namespace proyecto1
         public static int cont = 1;
         public static long idArt = 0;
         public static long idInv = 0;
+        bool repetido = false;
         InventarioController controller = new InventarioController();
         DepartamentoController deptoCOntrol = new DepartamentoController();
         ComboBoxsTurismo combo = new ComboBoxsTurismo();
@@ -37,6 +38,27 @@ namespace proyecto1
             panelMostrarInv.Hide();
             panelModificarInventario.Hide();
             paneldgvModificarInventario.Hide();
+
+            //dgvInventario.Columns.Add("ID", "ID");
+            //dgvInventario.Columns.Add("Nombre", "Nombre");
+            //dgvInventario.Columns.Add("Descripcion", "Descripcion");
+            //dgvInventario.Columns.Add("Costo_Reposicion", "Costo_Reposicion");
+            //dgvInventario.Columns.Add("Fecha_Actualizacion", "Fecha_Actualizacion");
+            //dgvInventario.Columns.Add("Categoria", "Categoria");
+
+            //dgvInventario2.Columns.Add("ID", "ID");
+            //dgvInventario2.Columns.Add("Nombre", "Nombre");
+            //dgvInventario2.Columns.Add("Descripcion", "Descripcion");
+            //dgvInventario2.Columns.Add("Costo_Reposicion", "Costo_Reposicion");
+            //dgvInventario2.Columns.Add("Fecha_Actualizacion", "Fecha_Actualizacion");
+            //dgvInventario2.Columns.Add("Categoria", "Categoria");
+
+            //dgvInventario3.Columns.Add("ID", "ID");
+            //dgvInventario3.Columns.Add("Nombre", "Nombre");
+            //dgvInventario3.Columns.Add("Descripcion", "Descripcion");
+            //dgvInventario3.Columns.Add("Costo_Reposicion", "Costo_Reposicion");
+            //dgvInventario3.Columns.Add("Fecha_Actualizacion", "Fecha_Actualizacion");
+            //dgvInventario3.Columns.Add("Categoria", "Categoria");
 
             GetArticulos();
             CargaTipoArticulo();
@@ -84,36 +106,70 @@ namespace proyecto1
 
         private async void GetArticulos()
         {
+            //dgvInventario.Rows.Clear();
+            //dgvInventario2.Rows.Clear();
             List<Articulo> lst = new List<Articulo>();
             var com = await controller.TraerArticulos();
-            if (com != null)
+            if(com == null)
+            {
+                MessageBox.Show("No se encontraron registros");
+            }
+            else
             {
                 foreach (var item in com.Articulo)
                 {
                     lst.Add(item);
                 }
             }
+
+            //var com2 = await combo.CargarCategorias();
+            //if (com == null || com2 == null)
+            //{
+            //    MessageBox.Show("No se encontraron registros");
+            //}
+            //else
+            //{
+            //    if(cont <= com.Articulo.Length)
+            //    {
+            //        foreach (var item in com.Articulo)
+            //        {
+            //            foreach (var item2 in com2.tipoArticulo)
+            //            {
+            //                if (item.id_categoria == item2.id_categoria)
+            //                {
+            //                    dgvInventario.Rows.Add(item.id_articulo, item.nombre, item.descripcion, item.costo_reposicion, item.fecha_actualizacion, item2.descripcion);
+            //                    dgvInventario2.Rows.Add(item.id_articulo, item.nombre, item.descripcion, item.costo_reposicion, item.fecha_actualizacion, item2.descripcion);                            
+            //                }
+            //            }
+            //            cont++;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        return;
+            //    }
+            //}
             dgvInventario.DataSource = lst;
             dgvInventario2.DataSource = lst;
             dgvInventario3.DataSource = lst;
-        }      
+        }
         private async void btnIngresarInventario_Click(object sender, EventArgs e)
         {
             List<Articulo> lst = new List<Articulo>();
             List<DetalleInventario> lst2 = new List<DetalleInventario>();
             List<Inventario> lst3 = new List<Inventario>();
-          
+
             bool creadoEnInventario = false;
             string nombre = txtNombreArticulo.Text;
-                string descripcion = txtDescripcion.Text;
-                int costo = (int)nudCosto.Value;
-                int categoria = cmbTipoArticulo.SelectedIndex + 1;
-                //int depto = cmbNumeroDepartamento.SelectedIndex + 1;
-                DateTime hoy = DateTime.Now;
-                string anio = hoy.Year.ToString();
-                string mes = hoy.Month.ToString();
-                string dia = hoy.Day.ToString();
-                string fecha = anio + "-" + mes + "-" + dia;
+            string descripcion = txtDescripcion.Text;
+            int costo = (int)nudCosto.Value;
+            int categoria = cmbTipoArticulo.SelectedIndex + 1;
+            //int depto = cmbNumeroDepartamento.SelectedIndex + 1;
+            DateTime hoy = DateTime.Now;
+            string anio = hoy.Year.ToString();
+            string mes = hoy.Month.ToString();
+            string dia = hoy.Day.ToString();
+            string fecha = anio + "-" + mes + "-" + dia;
             try
             {
 
@@ -124,7 +180,7 @@ namespace proyecto1
 
                     foreach (var item in art.Articulo)
                     {
-                        lst.Add(item);                        
+                        lst.Add(item);
                     }
                     cont = 1;
                     foreach (var item2 in lst)
@@ -148,22 +204,33 @@ namespace proyecto1
                 long idDepto = long.Parse(cmbNumeroDepartamento.SelectedValue.ToString());
 
                 var detInv = await controller.TraerInventarios();
-                if (detInv != null)
+                if(detInv == null)
                 {
-                    foreach (var item in detInv.inventario)
+                    bool respInv = await controller.IngresarInventario(idDepto, fecha);
+                    if (!respInv)
                     {
-                        lst3.Add(item);                
-                    }
-                }
-
-                foreach (var item in lst3)
-                {
-                    if (item.id_depto == idDepto)
-                    {
-                        bool respDetInv = await controller.IngresarDetalleInventario(idArt, item.id_inventario);
+                        var inv = await controller.TraerInventarios();
+                        foreach (var item in inv.inventario)
+                        {
+                            lst3.Add(item);
+                        }
+                        cont = 1;
+                        foreach (var item in lst3)
+                        {
+                            if (cont == lst3.Count)
+                            {
+                                idInv = item.id_inventario;
+                            }
+                            else
+                            {
+                                cont++;
+                            }
+                        }
+                        bool respDetInv = await controller.IngresarDetalleInventario(idArt, idInv);
                         if (!respDetInv)
                         {
                             MessageBox.Show("Se a agregado un Artículo");
+                            cont = 1;
                             GetArticulos();
                             creadoEnInventario = true;
                             return;
@@ -175,39 +242,65 @@ namespace proyecto1
                             return;
                         }
                     }
-                    else
+                }
+                else
+                {
+                    foreach (var item in detInv.inventario)
                     {
-                        creadoEnInventario = false;
+                        lst3.Add(item);
                     }
 
-                }
-
-                if (!creadoEnInventario)
-                {
-                    bool respInv = await controller.IngresarInventario(idDepto, fecha);
-                    if (!respInv)
+                    foreach (var item in lst3)
                     {
-                        var inv = await controller.TraerInventarios();
-                        foreach (var item in inv.inventario)
+                        if (item.id_depto == idDepto)
                         {
-                            lst3.Add(item);
-                        }
-                        cont = 0;
-                        foreach (var item in lst3)
-                        {
-                            if (cont == lst.Count)
+                            bool respDetInv = await controller.IngresarDetalleInventario(idArt, item.id_inventario);
+                            if (!respDetInv)
                             {
-                               idInv = item.id_inventario;
+                                MessageBox.Show("Se a agregado un Artículo");
+                                cont = 1;
+                                GetArticulos();
+                                creadoEnInventario = true;
+                                return;
                             }
                             else
                             {
-                                cont++;
+
+                                MessageBox.Show("No se agregó el Artículo");
+                                return;
                             }
                         }
-
-                        var detInv2 = await controller.TraerDetallesInventarios();
-                        if (detInv2 != null)
+                        else
                         {
+                            creadoEnInventario = false;
+                        }
+
+                    }
+
+                    if (!creadoEnInventario)
+                    {
+                        bool respInv = await controller.IngresarInventario(idDepto, fecha);
+                        if (!respInv)
+                        {
+                            var inv = await controller.TraerInventarios();
+                            foreach (var item in inv.inventario)
+                            {
+                                lst3.Add(item);
+                            }
+                            cont = 1;
+                            foreach (var item in lst3)
+                            {
+                                if (cont == lst3.Count)
+                                {
+                                    idInv = item.id_inventario;
+                                }
+                                else
+                                {
+                                    cont++;
+                                }
+                            }
+
+                            var detInv2 = await controller.TraerDetallesInventarios();
                             foreach (var item in detInv2.detalleInventario)
                             {
                                 if (item.id_inventario_id == idInv)
@@ -216,6 +309,7 @@ namespace proyecto1
                                     if (!respDetInv)
                                     {
                                         MessageBox.Show("Se a agregado un Artículo");
+                                        cont = 1;
                                         GetArticulos();
                                         creadoEnInventario = true;
                                         return;
@@ -234,19 +328,7 @@ namespace proyecto1
                             }
                         }
                     }
-                }
-                
-
-                //bool resp = await controller.IngresarArticulos(nombre, descripcion, costo, fecha, categoria);
-                //if (!resp)
-                //{
-                //    MessageBox.Show("Se a agregado un Artículo");
-                //    GetArticulos();
-                //}
-                //else
-                //{
-                //    MessageBox.Show("No se agregó el Artículo");
-                //}
+                }               
             }
             catch (Exception ex)
             {
@@ -259,13 +341,14 @@ namespace proyecto1
         private void rdbIngresarInventario_CheckedChanged(object sender, EventArgs e)
         {
             if (rdbIngresarInventario.Checked.Equals(true))
-            {  
+            {
                 panelMostrarInv.Hide();
                 panelModificarInventario.Hide();
                 paneldgvModificarInventario.Hide();
                 dgvInventario.Show();
                 panelIngresoInventario.Show();
-                GetArticulos();
+                cont = 1;
+                //  GetArticulos();
 
             }
         }
@@ -274,12 +357,13 @@ namespace proyecto1
         {
             if (rdbMostrarInventario.Checked.Equals(true))
             {
-                panelIngresoInventario.Hide(); 
+                panelIngresoInventario.Hide();
                 dgvInventario.Hide();
                 paneldgvModificarInventario.Hide();
                 panelModificarInventario.Hide();
                 panelMostrarInv.Show();
-                GetArticulos();
+                // GetArticulos();
+                cont = 1;
             }
         }
 
@@ -289,18 +373,19 @@ namespace proyecto1
             {
                 dgvInventario.Hide();
                 panelMostrarInv.Hide();
-                panelIngresoInventario.Hide();            
+                panelIngresoInventario.Hide();
                 panelModificarInventario.Show();
                 paneldgvModificarInventario.Show();
-                GetArticulos();
+                //GetArticulos();
+                cont = 1;
             }
         }
 
 
         private void btnVolverDepartamentos_Click(object sender, EventArgs e)
         {
-            this.Close();
-        }            
+
+        }
 
         private void MantenedorInventario_Load(object sender, EventArgs e)
         {
@@ -309,113 +394,36 @@ namespace proyecto1
 
         private void dgvInventario3_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            int idx = Int32.Parse(dgvInventario3.CurrentRow.Cells["ID"].Value.ToString());
-            DataTable dt = controller.FiltrarInventario(idx);
-            DataTable dt2 = controller.FiltrarInventarioModificar(idx);
-            try
-            {
-                //cmbTipoArticuloModificar.DataSource = combo.CargarComboBoxCategoria();
-                //cmbTipoArticuloModificar.DisplayMember = "descripcion";
-                //cmbTipoArticuloModificar.ValueMember = "id_categoria";
+            //int idx = Int32.Parse(dgvInventario3.CurrentRow.Cells["ID"].Value.ToString());
+            ////DataTable dt = controller.FiltrarInventario(idx);
+            ////DataTable dt2 = controller.FiltrarInventarioModificar(idx);
+            //try
+            //{
+            //    //cmbTipoArticuloModificar.DataSource = combo.CargarComboBoxCategoria();
+            //    //cmbTipoArticuloModificar.DisplayMember = "descripcion";
+            //    //cmbTipoArticuloModificar.ValueMember = "id_categoria";
 
-                //cmbDepartamentoModificar.DataSource = combo.CargarComboBoxDepartamento();
-                //cmbDepartamentoModificar.DisplayMember = "direccion";
-                //cmbDepartamentoModificar.ValueMember = "id_depto";
+            //    //cmbDepartamentoModificar.DataSource = combo.CargarComboBoxDepartamento();
+            //    //cmbDepartamentoModificar.DisplayMember = "direccion";
+            //    //cmbDepartamentoModificar.ValueMember = "id_depto";
 
-                var inde = validar.ValidaInt32(dt2.Rows[0][6].ToString());
-                var inde2 = validar.ValidaInt32(dt2.Rows[0][5].ToString());
-
-                
+            //    //var inde = validar.ValidaInt32(dt2.Rows[0][6].ToString());
+            //    //var inde2 = validar.ValidaInt32(dt2.Rows[0][5].ToString());
 
 
-                cmbDepartamentoModificar.SelectedValue = inde;
-                cmbTipoArticuloModificar.SelectedValue = inde2;
-                txtNombreModificar.Text = dt.Rows[0][1].ToString();
-                txtDescripcionModificar.Text = dt.Rows[0][2].ToString();
-                nudCostoModificar.Value = Int32.Parse(dt.Rows[0][3].ToString());               
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex);
-                throw;
-            }
 
-        }
 
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            if(dgvInventario3.CurrentRow.Selected == false)
-            {
-                MessageBox.Show("Debe seleccionar un Artículo a eliminar");
-            }
-            else
-            {
-                MessageBoxButtons botones = MessageBoxButtons.YesNoCancel;
-                DialogResult dr = MessageBox.Show("¿Esta seguro que desea elimina el Artículo seleccionado?", "Eliminando Artículo", botones,
-                    MessageBoxIcon.Question);
-                if (dr == DialogResult.Yes)
-                {
-                    try
-                    {
-                        int idx = Int32.Parse(dgvInventario3.CurrentRow.Cells["ID"].Value.ToString());
-                        if(idx == 0) {
-                            MessageBox.Show("Debe seleccionar un Artículo a eliminar");
-                        }
-                        else
-                        {
-                            bool resp = controller.EliminarInventario(idx);
-                            if (resp)
-                            {
-                                MessageBox.Show("Se ha eliminado un Artículo");
-                                dgvInventario3.DataSource = controller.Refresh2();
-                            }
-                            else
-                            {
-                                MessageBox.Show("No se pudo eliminar el Artículo");
-                            }                       
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error: " + ex);
-                        throw;
-                    }
-               
-                }
-                else if (dr == DialogResult.Cancel)
-                {
-                    MessageBox.Show("Operación Cancelada");
-                }
-
-            }
-        }
-
-        private void btnModificar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int idx = Int32.Parse(dgvInventario3.CurrentRow.Cells["ID"].Value.ToString());
-                string nombre = txtNombreModificar.Text;
-                string descripcion = txtDescripcionModificar.Text;
-                int costo = (int)nudCostoModificar.Value;
-                int categoria = cmbTipoArticuloModificar.SelectedIndex + 1;
-                bool resp = controller.ModificarInventario(idx, nombre, descripcion, costo, categoria);
-                if (resp)
-                {
-                    MessageBox.Show("Se modificó un Artículo");
-                    dgvInventario3.DataSource = controller.Refresh2();
-                }
-                else
-                {
-                    MessageBox.Show("No se pudo modificar el Artículo");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex);
-                throw;
-            }
-
+            //    cmbDepartamentoModificar.SelectedValue = inde;
+            //    cmbTipoArticuloModificar.SelectedValue = inde2;
+            //    txtNombreModificar.Text = dt.Rows[0][1].ToString();
+            //    txtDescripcionModificar.Text = dt.Rows[0][2].ToString();
+            //    nudCostoModificar.Value = Int32.Parse(dt.Rows[0][3].ToString());
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error: " + ex);
+            //    throw;
+            //}
 
         }
 
@@ -427,6 +435,87 @@ namespace proyecto1
 }
 
 #region lo que estaba antes
+
+
+
+//private void btnEliminar_Click(object sender, EventArgs e)
+//{
+//    if (dgvInventario3.CurrentRow.Selected == false)
+//    {
+//        MessageBox.Show("Debe seleccionar un Artículo a eliminar");
+//    }
+//    else
+//    {
+//        MessageBoxButtons botones = MessageBoxButtons.YesNoCancel;
+//        DialogResult dr = MessageBox.Show("¿Esta seguro que desea elimina el Artículo seleccionado?", "Eliminando Artículo", botones,
+//            MessageBoxIcon.Question);
+//        if (dr == DialogResult.Yes)
+//        {
+//            try
+//            {
+//                int idx = Int32.Parse(dgvInventario3.CurrentRow.Cells["ID"].Value.ToString());
+//                if (idx == 0)
+//                {
+//                    MessageBox.Show("Debe seleccionar un Artículo a eliminar");
+//                }
+//                else
+//                {
+//                    bool resp = controller.EliminarInventario(idx);
+//                    if (resp)
+//                    {
+//                        MessageBox.Show("Se ha eliminado un Artículo");
+//                        //dgvInventario3.DataSource = controller.Refresh2();
+//                    }
+//                    else
+//                    {
+//                        MessageBox.Show("No se pudo eliminar el Artículo");
+//                    }
+//                }
+//            }
+//            catch (Exception ex)
+//            {
+//                MessageBox.Show("Error: " + ex);
+//                throw;
+//            }
+
+//        }
+//        else if (dr == DialogResult.Cancel)
+//        {
+//            MessageBox.Show("Operación Cancelada");
+//        }
+
+//    }
+//}
+
+//private void btnModificar_Click(object sender, EventArgs e)
+//{
+//    try
+//    {
+//        int idx = Int32.Parse(dgvInventario3.CurrentRow.Cells["ID"].Value.ToString());
+//        string nombre = txtNombreModificar.Text;
+//        string descripcion = txtDescripcionModificar.Text;
+//        int costo = (int)nudCostoModificar.Value;
+//        int categoria = cmbTipoArticuloModificar.SelectedIndex + 1;
+//        bool resp = controller.ModificarInventario(idx, nombre, descripcion, costo, categoria);
+//        if (resp)
+//        {
+//            MessageBox.Show("Se modificó un Artículo");
+//            //  dgvInventario3.DataSource = controller.Refresh2();
+//        }
+//        else
+//        {
+//            MessageBox.Show("No se pudo modificar el Artículo");
+//        }
+//    }
+//    catch (Exception ex)
+//    {
+//        MessageBox.Show("Error: " + ex);
+//        throw;
+//    }
+
+
+//}
+
 
 //public DataTable CargarComboBoxCategoria()
 //{
