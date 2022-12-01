@@ -49,9 +49,12 @@ namespace proyecto1
         {
             List<MedioDePago> lst = new List<MedioDePago>();
             var com = await combo.CargarMediosDePago();
-            foreach (var item in com.medioDePago)
+            if (com != null)
             {
-                lst.Add(item);
+                foreach (var item in com.medioDePago)
+                {
+                    lst.Add(item);
+                }
             }
             cmbMedioPago.DataSource = lst;
             cmbMedioPago.DisplayMember = "descripcion";

@@ -32,8 +32,7 @@ namespace proyecto1
         }
                
         public async void Login(string usuario, string password)
-        {           
-                
+        {
             try
             {
                 var empleados = await empController.TraerEmpleados();
@@ -81,7 +80,7 @@ namespace proyecto1
             {
                 MessageBox.Show("Error: " + ex);
                 throw;
-            }            
+            }          
         }
 
         private void label1_Click(object sender, EventArgs e)

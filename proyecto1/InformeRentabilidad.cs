@@ -81,18 +81,24 @@ namespace proyecto1
         public async Task TraeReservas()
         {            
             var com = await reserva.TraerReservas();
-            foreach(var item in com.reserva)
+            if (com != null)
             {
-                lstReserva.Add(item);
+                foreach(var item in com.reserva)
+                {
+                    lstReserva.Add(item);
+                }
             }           
         }
 
         public async Task TraeGastos()
         {
             var com = await gasto.TraerGastosDeptos();
-            foreach (var item in com.gastosDepto)
+            if (com != null)
             {
-                lstGastos.Add(item);
+                foreach (var item in com.gastosDepto)
+                {
+                    lstGastos.Add(item);
+                }
             }
         }
 
