@@ -11,141 +11,92 @@ namespace TurismoBD.Controladores
 {
     public class InformesController
     {
-        public DataTable Refresh()
-        {
-            ConeccionBD connection = new ConeccionBD();
-            var dt = new DataTable();
-            var cmd = new SqlCommand();
-            var cnx = new SqlConnection(connection.Conneccion());
-            try
-            {
-                cnx.Open();
-                cmd.Connection = cnx;
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "select id_reserva as ID, " +
-                                  "f_checkin as Fecha_Ingreso, " +
-                                  "valor_total as Ingresos " +                                  
-                                  "from reserva;";
-                var da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            finally
-            {
-                cnx.Close();
-            }
-        }
+        //public DataTable Refresh()
+        //{
+        //    ConeccionBD connection = new ConeccionBD();
+        //    var dt = new DataTable();
+        //    var cmd = new SqlCommand();
+        //    var cnx = new SqlConnection(connection.Conneccion());
+        //    try
+        //    {
+        //        cnx.Open();
+        //        cmd.Connection = cnx;
+        //        cmd.CommandType = CommandType.Text;
+        //        cmd.CommandText = "select id_reserva as ID, " +
+        //                          "f_checkin as Fecha_Ingreso, " +
+        //                          "valor_total as Ingresos " +                                  
+        //                          "from reserva;";
+        //        var da = new SqlDataAdapter(cmd);
+        //        da.Fill(dt);
+        //        return dt;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        cnx.Close();
+        //    }
+        //}
 
-        public DataTable Refresh2()
-        {
-            ConeccionBD connection = new ConeccionBD();
-            var dt = new DataTable();
-            var cmd = new SqlCommand();
-            var cnx = new SqlConnection(connection.Conneccion());
-            try
-            {
-                cnx.Open();
-                cmd.Connection = cnx;
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "select id_mantencion as ID, " +
-                                  "fecha_pago as Fecha_Gastos, " +
-                                  "concepto as Concepto ," +
-                                  "valor_pago as Gastos " +
-                                  "from GASTO_DEPTO; ";
+        //public DataTable Refresh2()
+        //{
+        //    ConeccionBD connection = new ConeccionBD();
+        //    var dt = new DataTable();
+        //    var cmd = new SqlCommand();
+        //    var cnx = new SqlConnection(connection.Conneccion());
+        //    try
+        //    {
+        //        cnx.Open();
+        //        cmd.Connection = cnx;
+        //        cmd.CommandType = CommandType.Text;
+        //        cmd.CommandText = "select id_mantencion as ID, " +
+        //                          "fecha_pago as Fecha_Gastos, " +
+        //                          "concepto as Concepto ," +
+        //                          "valor_pago as Gastos " +
+        //                          "from GASTO_DEPTO; ";
                                   
-                var da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            finally
-            {
-                cnx.Close();
-            }
-        }
+        //        var da = new SqlDataAdapter(cmd);
+        //        da.Fill(dt);
+        //        return dt;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        cnx.Close();
+        //    }
+        //}
 
-        public DataTable mostrarUltimoRegistro()
-        {
-            ConeccionBD connection = new ConeccionBD();
-            SqlConnection cnx = new SqlConnection(connection.Conneccion());
-            try
-            {
-                cnx.Open();
-                SqlCommand cmd = new SqlCommand("SP_TRAEULTIMOINGRESADO", cnx);
-                cmd.CommandType = CommandType.StoredProcedure;               
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            finally
-            {
-                cnx.Close();
-            }
-        }
+        //public DataTable mostrarUltimoRegistro()
+        //{
+        //    ConeccionBD connection = new ConeccionBD();
+        //    SqlConnection cnx = new SqlConnection(connection.Conneccion());
+        //    try
+        //    {
+        //        cnx.Open();
+        //        SqlCommand cmd = new SqlCommand("SP_TRAEULTIMOINGRESADO", cnx);
+        //        cmd.CommandType = CommandType.StoredProcedure;               
+        //        SqlDataAdapter sda = new SqlDataAdapter(cmd);
+        //        DataTable dt = new DataTable();
+        //        sda.Fill(dt);
+        //        return dt;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        cnx.Close();
+        //    }
+        //}
 
 
-        public DataTable FiltrarIngresos(DateTime inicio, DateTime fin)
-        {
-            ConeccionBD connection = new ConeccionBD();
-            SqlConnection cnx = new SqlConnection(connection.Conneccion());
-            try
-            {
-                cnx.Open();
-                SqlCommand cmd = new SqlCommand("SP_FILTRAINGRESOS", cnx);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Inicio", inicio);
-                cmd.Parameters.AddWithValue("@Fin", fin);
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            finally
-            {
-                cnx.Close();
-            }
-        }
-        public DataTable FiltraTotalIngresosEgresos(DateTime inicio, DateTime fin)
-        {
-            ConeccionBD connection = new ConeccionBD();
-            SqlConnection cnx = new SqlConnection(connection.Conneccion());
-            try
-            {
-                cnx.Open();
-                SqlCommand cmd = new SqlCommand("SP_FILTRARENTABILIDADTOTAL", cnx);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Inicio", inicio);
-                cmd.Parameters.AddWithValue("@Fin", fin);
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            finally
-            {
-                cnx.Close();
-            }
-        }
+
 
      
     }
@@ -160,6 +111,57 @@ namespace TurismoBD.Controladores
 //    {
 //        cnx.Open();
 //        SqlCommand cmd = new SqlCommand("SP_FILTRAEGRESOS", cnx);
+//        cmd.CommandType = CommandType.StoredProcedure;
+//        cmd.Parameters.AddWithValue("@Inicio", inicio);
+//        cmd.Parameters.AddWithValue("@Fin", fin);
+//        SqlDataAdapter sda = new SqlDataAdapter(cmd);
+//        DataTable dt = new DataTable();
+//        sda.Fill(dt);
+//        return dt;
+//    }
+//    catch (Exception ex)
+//    {
+//        throw;
+//    }
+//    finally
+//    {
+//        cnx.Close();
+//    }
+//}
+
+//public DataTable FiltrarIngresos(DateTime inicio, DateTime fin)
+//{
+//    ConeccionBD connection = new ConeccionBD();
+//    SqlConnection cnx = new SqlConnection(connection.Conneccion());
+//    try
+//    {
+//        cnx.Open();
+//        SqlCommand cmd = new SqlCommand("SP_FILTRAINGRESOS", cnx);
+//        cmd.CommandType = CommandType.StoredProcedure;
+//        cmd.Parameters.AddWithValue("@Inicio", inicio);
+//        cmd.Parameters.AddWithValue("@Fin", fin);
+//        SqlDataAdapter sda = new SqlDataAdapter(cmd);
+//        DataTable dt = new DataTable();
+//        sda.Fill(dt);
+//        return dt;
+//    }
+//    catch (Exception ex)
+//    {
+//        throw;
+//    }
+//    finally
+//    {
+//        cnx.Close();
+//    }
+//}
+//public DataTable FiltraTotalIngresosEgresos(DateTime inicio, DateTime fin)
+//{
+//    ConeccionBD connection = new ConeccionBD();
+//    SqlConnection cnx = new SqlConnection(connection.Conneccion());
+//    try
+//    {
+//        cnx.Open();
+//        SqlCommand cmd = new SqlCommand("SP_FILTRARENTABILIDADTOTAL", cnx);
 //        cmd.CommandType = CommandType.StoredProcedure;
 //        cmd.Parameters.AddWithValue("@Inicio", inicio);
 //        cmd.Parameters.AddWithValue("@Fin", fin);
