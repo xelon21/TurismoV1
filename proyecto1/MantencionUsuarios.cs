@@ -43,10 +43,28 @@ namespace proyecto1
             panelModificarUsuarios2.Hide();
             rdbIngresarUsuario.Checked = true;
 
-            GetUsuarios();
-            CargaZona();
+            //dgvUsuarios.Columns.Add("ID", "ID");
+            //dgvUsuarios.Columns.Add("Email", "Email");
+            //dgvUsuarios.Columns.Add("Nombre Completo", "Nombre Completo");
+            //dgvUsuarios.Columns.Add("Rut", "Rut");
+            //dgvUsuarios.Columns.Add("Direccion", "Direccion");
+            //dgvUsuarios.Columns.Add("Telefono", "Telefono");
+            //dgvUsuarios.Columns.Add("Fecha Nacimiento", "Fecha Nacimiento");
+            //dgvUsuarios.Columns.Add("Tipo Usuario", "Tipo Usuario");
+            //dgvUsuarios.Columns.Add("Tipo Empleado", "Tipo Empleado");
 
-            
+            //dgvUsuarios2.Columns.Add("ID", "ID");
+            //dgvUsuarios2.Columns.Add("Email", "Email");
+            //dgvUsuarios2.Columns.Add("Nombre Completo", "Nombre Completo");
+            //dgvUsuarios2.Columns.Add("Rut", "Rut");
+            //dgvUsuarios2.Columns.Add("Direccion", "Direccion");
+            //dgvUsuarios2.Columns.Add("Telefono", "Telefono");
+            //dgvUsuarios2.Columns.Add("Fecha Nacimiento", "Fecha Nacimiento");
+            //dgvUsuarios2.Columns.Add("Tipo Usuario", "Tipo Usuario");
+            //dgvUsuarios2.Columns.Add("Tipo Empleado", "Tipo Empleado");
+
+            GetUsuarios();
+            CargaZona();           
 
         }
 
@@ -67,13 +85,33 @@ namespace proyecto1
         }
 
         private async void GetUsuarios()
-        {
+        {       
+
             List<Usuario> lst = new List<Usuario>();
             var com = await controller.TraerUsuarios();
+            //var com2 = await combo.CargaTipoUsuario();
+            //var com3 = await empController.TraerEmpleados();
+
             foreach (var item in com.Usuario)
             {
                 lst.Add(item);
-            }
+                //foreach (var item2 in com2.TipoUsuario)
+                //{
+                //    if (item.id_tipo_usuario_id == item2.id_tipo)
+                //    {                                           
+                //        foreach (var item3 in com3.empleado)
+                //        {
+                //            if (item.id_usuario == item3.id_usuario_id)
+                //            {
+                //                dgvUsuarios.Rows.Add(item.id_usuario, item.email, item.nombre_completo, item.rut, item.direccion,
+                //                                    item.telefono, item.fecha_nacimiento, item2.descripcion, item3.tipo_empleado);
+                //                dgvUsuarios2.Rows.Add(item.id_usuario, item.email, item.nombre_completo, item.rut, item.direccion,
+                //                                    item.telefono, item.fecha_nacimiento, item2.descripcion, item3.tipo_empleado);
+                //            }
+                //        }
+                //    }
+                //}
+            }         
             dgvUsuarios.DataSource = lst;
             dgvUsuarios2.DataSource = lst;
             dgvUsuarios3.DataSource = lst;
@@ -154,7 +192,7 @@ namespace proyecto1
             panelModificarUsuarios.Hide();
             panelModificarUsuarios2.Hide();
         
-            GetUsuarios();
+            //GetUsuarios();
         }
         private void rdbMostrarUsuario_CheckedChanged(object sender, EventArgs e)
         {
@@ -164,7 +202,7 @@ namespace proyecto1
             panelModificarUsuarios.Hide();
             panelModificarUsuarios2.Hide();
         
-            GetUsuarios();
+            //GetUsuarios();
         }
         private void rdbModificarYEliminarUsuario_CheckedChanged(object sender, EventArgs e)
         {
@@ -173,7 +211,7 @@ namespace proyecto1
             panelMostrarUsuarios.Hide();
             panelModificarUsuarios.Show();
             panelModificarUsuarios2.Show();
-            GetUsuarios();
+            //GetUsuarios();
         }
         private void dgvUsuarios3_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -214,7 +252,7 @@ namespace proyecto1
                 if (resp)
                 {
                     MessageBox.Show("Se ha modificado un Usuario");
-                    dgvUsuarios3.DataSource = controller.Refresh2();
+                   // dgvUsuarios3.DataSource = controller.Refresh2();
                 }
                 else
                 {
@@ -240,7 +278,7 @@ namespace proyecto1
                 if (resp)
                 {
                     MessageBox.Show("Se ha eliminado un usuario");
-                    dgvUsuarios3.DataSource = controller.Refresh2();
+                   // dgvUsuarios3.DataSource = controller.Refresh2();
                 }
                 else
                 {

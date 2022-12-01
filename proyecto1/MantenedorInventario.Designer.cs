@@ -166,7 +166,7 @@ namespace proyecto1
             this.btnModificar.TabIndex = 27;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            //this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // nudCostoModificar
             // 
@@ -204,7 +204,7 @@ namespace proyecto1
             this.btnEliminar.TabIndex = 2;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = false;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            //this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // panel2
             // 

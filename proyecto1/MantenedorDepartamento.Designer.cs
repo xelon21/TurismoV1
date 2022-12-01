@@ -30,28 +30,6 @@ namespace proyecto1
         private void InitializeComponent()
         {
             this.panelFormularioDepartamento = new System.Windows.Forms.Panel();
-            this.panelModificarDepartamento2 = new System.Windows.Forms.Panel();
-            this.dgvDepartamentos3 = new System.Windows.Forms.DataGridView();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cmbNumeroDepartamentoModificar = new System.Windows.Forms.ComboBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.cmbZonaModificar = new System.Windows.Forms.ComboBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.panelModificarDepartamento = new System.Windows.Forms.Panel();
             this.txtCantidadCamasModificar = new System.Windows.Forms.TextBox();
             this.txtUrlImg = new System.Windows.Forms.TextBox();
@@ -75,6 +53,28 @@ namespace proyecto1
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.panelMostrarDepartamento = new System.Windows.Forms.Panel();
+            this.panelModificarDepartamento2 = new System.Windows.Forms.Panel();
+            this.dgvDepartamentos3 = new System.Windows.Forms.DataGridView();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cmbNumeroDepartamentoModificar = new System.Windows.Forms.ComboBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.cmbZonaModificar = new System.Windows.Forms.ComboBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.dgvDepartamentos2 = new System.Windows.Forms.DataGridView();
             this.panelCrudDepartamento = new System.Windows.Forms.Panel();
             this.rdbModificarYEliminarDepartamento = new System.Windows.Forms.RadioButton();
@@ -106,11 +106,11 @@ namespace proyecto1
             this.label52 = new System.Windows.Forms.Label();
             this.label53 = new System.Windows.Forms.Label();
             this.panelFormularioDepartamento.SuspendLayout();
+            this.panelModificarDepartamento.SuspendLayout();
+            this.panelMostrarDepartamento.SuspendLayout();
             this.panelModificarDepartamento2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartamentos3)).BeginInit();
             this.panel3.SuspendLayout();
-            this.panelModificarDepartamento.SuspendLayout();
-            this.panelMostrarDepartamento.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartamentos2)).BeginInit();
             this.panelCrudDepartamento.SuspendLayout();
             this.panelIngresoDepartamento2.SuspendLayout();
@@ -131,18 +131,234 @@ namespace proyecto1
             this.panelFormularioDepartamento.Controls.Add(this.panelIngresoDepartamento);
             this.panelFormularioDepartamento.Location = new System.Drawing.Point(12, 12);
             this.panelFormularioDepartamento.Name = "panelFormularioDepartamento";
-            this.panelFormularioDepartamento.Size = new System.Drawing.Size(795, 534);
+            this.panelFormularioDepartamento.Size = new System.Drawing.Size(894, 610);
             this.panelFormularioDepartamento.TabIndex = 14;
+            // 
+            // panelModificarDepartamento
+            // 
+            this.panelModificarDepartamento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelModificarDepartamento.Controls.Add(this.txtCantidadCamasModificar);
+            this.panelModificarDepartamento.Controls.Add(this.txtUrlImg);
+            this.panelModificarDepartamento.Controls.Add(this.label11);
+            this.panelModificarDepartamento.Controls.Add(this.txtCantidadBanosModificar);
+            this.panelModificarDepartamento.Controls.Add(this.label12);
+            this.panelModificarDepartamento.Controls.Add(this.btnModificarDepartamento);
+            this.panelModificarDepartamento.Controls.Add(this.btnEliminarDepartamento);
+            this.panelModificarDepartamento.Controls.Add(this.txtCapacidadModificar);
+            this.panelModificarDepartamento.Controls.Add(this.label13);
+            this.panelModificarDepartamento.Controls.Add(this.label14);
+            this.panelModificarDepartamento.Controls.Add(this.label15);
+            this.panelModificarDepartamento.Controls.Add(this.txtDescripcionModificar);
+            this.panelModificarDepartamento.Controls.Add(this.cmbZonaMod);
+            this.panelModificarDepartamento.Controls.Add(this.txtMetrosCuadradosModificar);
+            this.panelModificarDepartamento.Controls.Add(this.txtValorModificar);
+            this.panelModificarDepartamento.Controls.Add(this.txtDireccionModificar);
+            this.panelModificarDepartamento.Controls.Add(this.label16);
+            this.panelModificarDepartamento.Controls.Add(this.label17);
+            this.panelModificarDepartamento.Controls.Add(this.label18);
+            this.panelModificarDepartamento.Controls.Add(this.label19);
+            this.panelModificarDepartamento.Controls.Add(this.label20);
+            this.panelModificarDepartamento.Location = new System.Drawing.Point(24, 83);
+            this.panelModificarDepartamento.Name = "panelModificarDepartamento";
+            this.panelModificarDepartamento.Size = new System.Drawing.Size(848, 252);
+            this.panelModificarDepartamento.TabIndex = 16;
+            // 
+            // txtCantidadCamasModificar
+            // 
+            this.txtCantidadCamasModificar.Location = new System.Drawing.Point(589, 148);
+            this.txtCantidadCamasModificar.Name = "txtCantidadCamasModificar";
+            this.txtCantidadCamasModificar.Size = new System.Drawing.Size(66, 23);
+            this.txtCantidadCamasModificar.TabIndex = 36;
+            // 
+            // txtUrlImg
+            // 
+            this.txtUrlImg.Location = new System.Drawing.Point(113, 92);
+            this.txtUrlImg.Name = "txtUrlImg";
+            this.txtUrlImg.Size = new System.Drawing.Size(303, 23);
+            this.txtUrlImg.TabIndex = 35;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(514, 95);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(69, 15);
+            this.label11.TabIndex = 33;
+            this.label11.Text = "Capacidad: ";
+            this.label11.Click += new System.EventHandler(this.label11_Click);
+            // 
+            // txtCantidadBanosModificar
+            // 
+            this.txtCantidadBanosModificar.Location = new System.Drawing.Point(589, 119);
+            this.txtCantidadBanosModificar.Name = "txtCantidadBanosModificar";
+            this.txtCantidadBanosModificar.Size = new System.Drawing.Size(66, 23);
+            this.txtCantidadBanosModificar.TabIndex = 31;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(483, 154);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(100, 15);
+            this.label12.TabIndex = 30;
+            this.label12.Text = "Cantidad Camas: ";
+            // 
+            // btnModificarDepartamento
+            // 
+            this.btnModificarDepartamento.Location = new System.Drawing.Point(609, 184);
+            this.btnModificarDepartamento.Name = "btnModificarDepartamento";
+            this.btnModificarDepartamento.Size = new System.Drawing.Size(118, 38);
+            this.btnModificarDepartamento.TabIndex = 2;
+            this.btnModificarDepartamento.Text = "Modificar";
+            this.btnModificarDepartamento.UseVisualStyleBackColor = true;
+            this.btnModificarDepartamento.Click += new System.EventHandler(this.btnModificarDepartamento_Click);
+            // 
+            // btnEliminarDepartamento
+            // 
+            this.btnEliminarDepartamento.Location = new System.Drawing.Point(468, 184);
+            this.btnEliminarDepartamento.Name = "btnEliminarDepartamento";
+            this.btnEliminarDepartamento.Size = new System.Drawing.Size(119, 38);
+            this.btnEliminarDepartamento.TabIndex = 2;
+            this.btnEliminarDepartamento.Text = "Eliminar";
+            this.btnEliminarDepartamento.UseVisualStyleBackColor = true;
+            this.btnEliminarDepartamento.Click += new System.EventHandler(this.btnEliminarDepartamento_Click);
+            // 
+            // txtCapacidadModificar
+            // 
+            this.txtCapacidadModificar.Location = new System.Drawing.Point(589, 90);
+            this.txtCapacidadModificar.Name = "txtCapacidadModificar";
+            this.txtCapacidadModificar.Size = new System.Drawing.Size(66, 23);
+            this.txtCapacidadModificar.TabIndex = 29;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(36, 98);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(68, 15);
+            this.label13.TabIndex = 28;
+            this.label13.Text = "Url Imagen:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(67, 66);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(40, 15);
+            this.label14.TabIndex = 27;
+            this.label14.Text = "Zona: ";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(487, 125);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(96, 15);
+            this.label15.TabIndex = 26;
+            this.label15.Text = "Cantidad Baños: ";
+            // 
+            // txtDescripcionModificar
+            // 
+            this.txtDescripcionModificar.Location = new System.Drawing.Point(113, 122);
+            this.txtDescripcionModificar.Multiline = true;
+            this.txtDescripcionModificar.Name = "txtDescripcionModificar";
+            this.txtDescripcionModificar.Size = new System.Drawing.Size(316, 95);
+            this.txtDescripcionModificar.TabIndex = 25;
+            // 
+            // cmbZonaMod
+            // 
+            this.cmbZonaMod.FormattingEnabled = true;
+            this.cmbZonaMod.Location = new System.Drawing.Point(113, 63);
+            this.cmbZonaMod.Name = "cmbZonaMod";
+            this.cmbZonaMod.Size = new System.Drawing.Size(202, 23);
+            this.cmbZonaMod.TabIndex = 22;
+            this.cmbZonaMod.Text = "Zona";
+            // 
+            // txtMetrosCuadradosModificar
+            // 
+            this.txtMetrosCuadradosModificar.Location = new System.Drawing.Point(589, 61);
+            this.txtMetrosCuadradosModificar.Name = "txtMetrosCuadradosModificar";
+            this.txtMetrosCuadradosModificar.Size = new System.Drawing.Size(66, 23);
+            this.txtMetrosCuadradosModificar.TabIndex = 24;
+            // 
+            // txtValorModificar
+            // 
+            this.txtValorModificar.Location = new System.Drawing.Point(589, 34);
+            this.txtValorModificar.Name = "txtValorModificar";
+            this.txtValorModificar.Size = new System.Drawing.Size(91, 23);
+            this.txtValorModificar.TabIndex = 23;
+            // 
+            // txtDireccionModificar
+            // 
+            this.txtDireccionModificar.Location = new System.Drawing.Point(113, 34);
+            this.txtDireccionModificar.Name = "txtDireccionModificar";
+            this.txtDireccionModificar.Size = new System.Drawing.Size(316, 23);
+            this.txtDireccionModificar.TabIndex = 5;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(5, 118);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(0, 15);
+            this.label16.TabIndex = 10;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(50, 37);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(63, 15);
+            this.label17.TabIndex = 4;
+            this.label17.Text = "Dirección: ";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(32, 128);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(75, 15);
+            this.label18.TabIndex = 12;
+            this.label18.Text = "Descripción: ";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(470, 66);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(110, 15);
+            this.label19.TabIndex = 9;
+            this.label19.Text = "Metros Cuadrados: ";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(544, 37);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(39, 15);
+            this.label20.TabIndex = 7;
+            this.label20.Text = "Valor: ";
+            // 
+            // panelMostrarDepartamento
+            // 
+            this.panelMostrarDepartamento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelMostrarDepartamento.Controls.Add(this.panelModificarDepartamento2);
+            this.panelMostrarDepartamento.Controls.Add(this.dgvDepartamentos2);
+            this.panelMostrarDepartamento.Location = new System.Drawing.Point(24, 83);
+            this.panelMostrarDepartamento.Name = "panelMostrarDepartamento";
+            this.panelMostrarDepartamento.Size = new System.Drawing.Size(848, 453);
+            this.panelMostrarDepartamento.TabIndex = 15;
             // 
             // panelModificarDepartamento2
             // 
             this.panelModificarDepartamento2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelModificarDepartamento2.Controls.Add(this.dgvDepartamentos3);
             this.panelModificarDepartamento2.Controls.Add(this.panel3);
-            this.panelModificarDepartamento2.Location = new System.Drawing.Point(-1, 257);
+            this.panelModificarDepartamento2.Location = new System.Drawing.Point(-1, 276);
             this.panelModificarDepartamento2.Name = "panelModificarDepartamento2";
-            this.panelModificarDepartamento2.Size = new System.Drawing.Size(745, 130);
+            this.panelModificarDepartamento2.Size = new System.Drawing.Size(848, 176);
             this.panelModificarDepartamento2.TabIndex = 17;
+            this.panelModificarDepartamento2.Paint += new System.Windows.Forms.PaintEventHandler(this.panelModificarDepartamento2_Paint);
             // 
             // dgvDepartamentos3
             // 
@@ -161,7 +377,7 @@ namespace proyecto1
             this.dgvDepartamentos3.RowHeadersVisible = false;
             this.dgvDepartamentos3.RowTemplate.Height = 25;
             this.dgvDepartamentos3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDepartamentos3.Size = new System.Drawing.Size(745, 130);
+            this.dgvDepartamentos3.Size = new System.Drawing.Size(848, 176);
             this.dgvDepartamentos3.TabIndex = 31;
             this.dgvDepartamentos3.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDepartamentos3_CellContentClick);
             // 
@@ -361,221 +577,6 @@ namespace proyecto1
             this.label10.TabIndex = 7;
             this.label10.Text = "Valor: ";
             // 
-            // panelModificarDepartamento
-            // 
-            this.panelModificarDepartamento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelModificarDepartamento.Controls.Add(this.txtCantidadCamasModificar);
-            this.panelModificarDepartamento.Controls.Add(this.txtUrlImg);
-            this.panelModificarDepartamento.Controls.Add(this.label11);
-            this.panelModificarDepartamento.Controls.Add(this.txtCantidadBanosModificar);
-            this.panelModificarDepartamento.Controls.Add(this.label12);
-            this.panelModificarDepartamento.Controls.Add(this.btnModificarDepartamento);
-            this.panelModificarDepartamento.Controls.Add(this.btnEliminarDepartamento);
-            this.panelModificarDepartamento.Controls.Add(this.txtCapacidadModificar);
-            this.panelModificarDepartamento.Controls.Add(this.label13);
-            this.panelModificarDepartamento.Controls.Add(this.label14);
-            this.panelModificarDepartamento.Controls.Add(this.label15);
-            this.panelModificarDepartamento.Controls.Add(this.txtDescripcionModificar);
-            this.panelModificarDepartamento.Controls.Add(this.cmbZonaMod);
-            this.panelModificarDepartamento.Controls.Add(this.txtMetrosCuadradosModificar);
-            this.panelModificarDepartamento.Controls.Add(this.txtValorModificar);
-            this.panelModificarDepartamento.Controls.Add(this.txtDireccionModificar);
-            this.panelModificarDepartamento.Controls.Add(this.label16);
-            this.panelModificarDepartamento.Controls.Add(this.label17);
-            this.panelModificarDepartamento.Controls.Add(this.label18);
-            this.panelModificarDepartamento.Controls.Add(this.label19);
-            this.panelModificarDepartamento.Controls.Add(this.label20);
-            this.panelModificarDepartamento.Location = new System.Drawing.Point(24, 83);
-            this.panelModificarDepartamento.Name = "panelModificarDepartamento";
-            this.panelModificarDepartamento.Size = new System.Drawing.Size(745, 252);
-            this.panelModificarDepartamento.TabIndex = 16;
-            // 
-            // txtCantidadCamasModificar
-            // 
-            this.txtCantidadCamasModificar.Location = new System.Drawing.Point(589, 148);
-            this.txtCantidadCamasModificar.Name = "txtCantidadCamasModificar";
-            this.txtCantidadCamasModificar.Size = new System.Drawing.Size(66, 23);
-            this.txtCantidadCamasModificar.TabIndex = 36;
-            // 
-            // txtUrlImg
-            // 
-            this.txtUrlImg.Location = new System.Drawing.Point(113, 92);
-            this.txtUrlImg.Name = "txtUrlImg";
-            this.txtUrlImg.Size = new System.Drawing.Size(303, 23);
-            this.txtUrlImg.TabIndex = 35;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(514, 95);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(69, 15);
-            this.label11.TabIndex = 33;
-            this.label11.Text = "Capacidad: ";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
-            // 
-            // txtCantidadBanosModificar
-            // 
-            this.txtCantidadBanosModificar.Location = new System.Drawing.Point(589, 119);
-            this.txtCantidadBanosModificar.Name = "txtCantidadBanosModificar";
-            this.txtCantidadBanosModificar.Size = new System.Drawing.Size(66, 23);
-            this.txtCantidadBanosModificar.TabIndex = 31;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(483, 154);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(100, 15);
-            this.label12.TabIndex = 30;
-            this.label12.Text = "Cantidad Camas: ";
-            // 
-            // btnModificarDepartamento
-            // 
-            this.btnModificarDepartamento.Location = new System.Drawing.Point(609, 184);
-            this.btnModificarDepartamento.Name = "btnModificarDepartamento";
-            this.btnModificarDepartamento.Size = new System.Drawing.Size(118, 38);
-            this.btnModificarDepartamento.TabIndex = 2;
-            this.btnModificarDepartamento.Text = "Modificar";
-            this.btnModificarDepartamento.UseVisualStyleBackColor = true;
-            this.btnModificarDepartamento.Click += new System.EventHandler(this.btnModificarDepartamento_Click);
-            // 
-            // btnEliminarDepartamento
-            // 
-            this.btnEliminarDepartamento.Location = new System.Drawing.Point(468, 184);
-            this.btnEliminarDepartamento.Name = "btnEliminarDepartamento";
-            this.btnEliminarDepartamento.Size = new System.Drawing.Size(119, 38);
-            this.btnEliminarDepartamento.TabIndex = 2;
-            this.btnEliminarDepartamento.Text = "Eliminar";
-            this.btnEliminarDepartamento.UseVisualStyleBackColor = true;
-            this.btnEliminarDepartamento.Click += new System.EventHandler(this.btnEliminarDepartamento_Click);
-            // 
-            // txtCapacidadModificar
-            // 
-            this.txtCapacidadModificar.Location = new System.Drawing.Point(589, 90);
-            this.txtCapacidadModificar.Name = "txtCapacidadModificar";
-            this.txtCapacidadModificar.Size = new System.Drawing.Size(66, 23);
-            this.txtCapacidadModificar.TabIndex = 29;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(36, 98);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(68, 15);
-            this.label13.TabIndex = 28;
-            this.label13.Text = "Url Imagen:";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(67, 66);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(40, 15);
-            this.label14.TabIndex = 27;
-            this.label14.Text = "Zona: ";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(487, 125);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(96, 15);
-            this.label15.TabIndex = 26;
-            this.label15.Text = "Cantidad Baños: ";
-            // 
-            // txtDescripcionModificar
-            // 
-            this.txtDescripcionModificar.Location = new System.Drawing.Point(113, 122);
-            this.txtDescripcionModificar.Multiline = true;
-            this.txtDescripcionModificar.Name = "txtDescripcionModificar";
-            this.txtDescripcionModificar.Size = new System.Drawing.Size(316, 95);
-            this.txtDescripcionModificar.TabIndex = 25;
-            // 
-            // cmbZonaMod
-            // 
-            this.cmbZonaMod.FormattingEnabled = true;
-            this.cmbZonaMod.Location = new System.Drawing.Point(113, 63);
-            this.cmbZonaMod.Name = "cmbZonaMod";
-            this.cmbZonaMod.Size = new System.Drawing.Size(202, 23);
-            this.cmbZonaMod.TabIndex = 22;
-            this.cmbZonaMod.Text = "Zona";
-            // 
-            // txtMetrosCuadradosModificar
-            // 
-            this.txtMetrosCuadradosModificar.Location = new System.Drawing.Point(589, 61);
-            this.txtMetrosCuadradosModificar.Name = "txtMetrosCuadradosModificar";
-            this.txtMetrosCuadradosModificar.Size = new System.Drawing.Size(66, 23);
-            this.txtMetrosCuadradosModificar.TabIndex = 24;
-            // 
-            // txtValorModificar
-            // 
-            this.txtValorModificar.Location = new System.Drawing.Point(589, 34);
-            this.txtValorModificar.Name = "txtValorModificar";
-            this.txtValorModificar.Size = new System.Drawing.Size(91, 23);
-            this.txtValorModificar.TabIndex = 23;
-            // 
-            // txtDireccionModificar
-            // 
-            this.txtDireccionModificar.Location = new System.Drawing.Point(113, 34);
-            this.txtDireccionModificar.Name = "txtDireccionModificar";
-            this.txtDireccionModificar.Size = new System.Drawing.Size(316, 23);
-            this.txtDireccionModificar.TabIndex = 5;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(5, 118);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(0, 15);
-            this.label16.TabIndex = 10;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(50, 37);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(63, 15);
-            this.label17.TabIndex = 4;
-            this.label17.Text = "Dirección: ";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(32, 128);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(75, 15);
-            this.label18.TabIndex = 12;
-            this.label18.Text = "Descripción: ";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(470, 66);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(110, 15);
-            this.label19.TabIndex = 9;
-            this.label19.Text = "Metros Cuadrados: ";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(544, 37);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(39, 15);
-            this.label20.TabIndex = 7;
-            this.label20.Text = "Valor: ";
-            // 
-            // panelMostrarDepartamento
-            // 
-            this.panelMostrarDepartamento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelMostrarDepartamento.Controls.Add(this.panelModificarDepartamento2);
-            this.panelMostrarDepartamento.Controls.Add(this.dgvDepartamentos2);
-            this.panelMostrarDepartamento.Location = new System.Drawing.Point(24, 83);
-            this.panelMostrarDepartamento.Name = "panelMostrarDepartamento";
-            this.panelMostrarDepartamento.Size = new System.Drawing.Size(745, 388);
-            this.panelMostrarDepartamento.TabIndex = 15;
-            // 
             // dgvDepartamentos2
             // 
             this.dgvDepartamentos2.AllowUserToAddRows = false;
@@ -593,7 +594,7 @@ namespace proyecto1
             this.dgvDepartamentos2.RowHeadersVisible = false;
             this.dgvDepartamentos2.RowTemplate.Height = 25;
             this.dgvDepartamentos2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDepartamentos2.Size = new System.Drawing.Size(745, 388);
+            this.dgvDepartamentos2.Size = new System.Drawing.Size(848, 453);
             this.dgvDepartamentos2.TabIndex = 32;
             // 
             // panelCrudDepartamento
@@ -604,14 +605,14 @@ namespace proyecto1
             this.panelCrudDepartamento.Controls.Add(this.rdbIngresarDepartamento);
             this.panelCrudDepartamento.Location = new System.Drawing.Point(24, 46);
             this.panelCrudDepartamento.Name = "panelCrudDepartamento";
-            this.panelCrudDepartamento.Size = new System.Drawing.Size(745, 28);
+            this.panelCrudDepartamento.Size = new System.Drawing.Size(848, 28);
             this.panelCrudDepartamento.TabIndex = 8;
             // 
             // rdbModificarYEliminarDepartamento
             // 
             this.rdbModificarYEliminarDepartamento.AutoSize = true;
             this.rdbModificarYEliminarDepartamento.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.rdbModificarYEliminarDepartamento.Location = new System.Drawing.Point(527, 3);
+            this.rdbModificarYEliminarDepartamento.Location = new System.Drawing.Point(650, 3);
             this.rdbModificarYEliminarDepartamento.Name = "rdbModificarYEliminarDepartamento";
             this.rdbModificarYEliminarDepartamento.Size = new System.Drawing.Size(150, 21);
             this.rdbModificarYEliminarDepartamento.TabIndex = 5;
@@ -624,7 +625,7 @@ namespace proyecto1
             // 
             this.rdbMostrarDepartamento.AutoSize = true;
             this.rdbMostrarDepartamento.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.rdbMostrarDepartamento.Location = new System.Drawing.Point(303, 3);
+            this.rdbMostrarDepartamento.Location = new System.Drawing.Point(371, 3);
             this.rdbMostrarDepartamento.Name = "rdbMostrarDepartamento";
             this.rdbMostrarDepartamento.Size = new System.Drawing.Size(74, 21);
             this.rdbMostrarDepartamento.TabIndex = 4;
@@ -648,9 +649,9 @@ namespace proyecto1
             // 
             // btnVolverDepartamento
             // 
-            this.btnVolverDepartamento.Location = new System.Drawing.Point(24, 493);
+            this.btnVolverDepartamento.Location = new System.Drawing.Point(24, 558);
             this.btnVolverDepartamento.Name = "btnVolverDepartamento";
-            this.btnVolverDepartamento.Size = new System.Drawing.Size(75, 23);
+            this.btnVolverDepartamento.Size = new System.Drawing.Size(108, 33);
             this.btnVolverDepartamento.TabIndex = 5;
             this.btnVolverDepartamento.Text = "Volver";
             this.btnVolverDepartamento.UseVisualStyleBackColor = true;
@@ -660,7 +661,7 @@ namespace proyecto1
             // 
             this.label54.AutoSize = true;
             this.label54.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label54.Location = new System.Drawing.Point(270, 11);
+            this.label54.Location = new System.Drawing.Point(328, 12);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(232, 18);
             this.label54.TabIndex = 0;
@@ -670,9 +671,9 @@ namespace proyecto1
             // 
             this.panelIngresoDepartamento2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelIngresoDepartamento2.Controls.Add(this.dgvDepartamentos);
-            this.panelIngresoDepartamento2.Location = new System.Drawing.Point(24, 360);
+            this.panelIngresoDepartamento2.Location = new System.Drawing.Point(24, 376);
             this.panelIngresoDepartamento2.Name = "panelIngresoDepartamento2";
-            this.panelIngresoDepartamento2.Size = new System.Drawing.Size(745, 111);
+            this.panelIngresoDepartamento2.Size = new System.Drawing.Size(848, 160);
             this.panelIngresoDepartamento2.TabIndex = 8;
             // 
             // dgvDepartamentos
@@ -692,7 +693,7 @@ namespace proyecto1
             this.dgvDepartamentos.RowHeadersVisible = false;
             this.dgvDepartamentos.RowTemplate.Height = 25;
             this.dgvDepartamentos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDepartamentos.Size = new System.Drawing.Size(745, 111);
+            this.dgvDepartamentos.Size = new System.Drawing.Size(848, 160);
             this.dgvDepartamentos.TabIndex = 32;
             // 
             // panelIngresoDepartamento
@@ -720,20 +721,20 @@ namespace proyecto1
             this.panelIngresoDepartamento.Controls.Add(this.label53);
             this.panelIngresoDepartamento.Location = new System.Drawing.Point(24, 83);
             this.panelIngresoDepartamento.Name = "panelIngresoDepartamento";
-            this.panelIngresoDepartamento.Size = new System.Drawing.Size(745, 271);
+            this.panelIngresoDepartamento.Size = new System.Drawing.Size(848, 271);
             this.panelIngresoDepartamento.TabIndex = 7;
             // 
             // txtCapacidad
             // 
-            this.txtCapacidad.Location = new System.Drawing.Point(589, 148);
+            this.txtCapacidad.Location = new System.Drawing.Point(669, 151);
             this.txtCapacidad.Name = "txtCapacidad";
-            this.txtCapacidad.Size = new System.Drawing.Size(66, 23);
+            this.txtCapacidad.Size = new System.Drawing.Size(91, 23);
             this.txtCapacidad.TabIndex = 36;
             // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(514, 153);
+            this.label21.Location = new System.Drawing.Point(594, 156);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(69, 15);
             this.label21.TabIndex = 35;
@@ -748,15 +749,15 @@ namespace proyecto1
             // 
             // txtCantidadCamas
             // 
-            this.txtCantidadCamas.Location = new System.Drawing.Point(589, 119);
+            this.txtCantidadCamas.Location = new System.Drawing.Point(669, 122);
             this.txtCantidadCamas.Name = "txtCantidadCamas";
-            this.txtCantidadCamas.Size = new System.Drawing.Size(66, 23);
+            this.txtCantidadCamas.Size = new System.Drawing.Size(91, 23);
             this.txtCantidadCamas.TabIndex = 31;
             // 
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(483, 122);
+            this.label45.Location = new System.Drawing.Point(563, 125);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(100, 15);
             this.label45.TabIndex = 30;
@@ -764,7 +765,7 @@ namespace proyecto1
             // 
             // btnIngresarDepartamento
             // 
-            this.btnIngresarDepartamento.Location = new System.Drawing.Point(527, 193);
+            this.btnIngresarDepartamento.Location = new System.Drawing.Point(553, 202);
             this.btnIngresarDepartamento.Name = "btnIngresarDepartamento";
             this.btnIngresarDepartamento.Size = new System.Drawing.Size(153, 41);
             this.btnIngresarDepartamento.TabIndex = 2;
@@ -774,9 +775,9 @@ namespace proyecto1
             // 
             // txtCantidadBaños
             // 
-            this.txtCantidadBaños.Location = new System.Drawing.Point(589, 90);
+            this.txtCantidadBaños.Location = new System.Drawing.Point(669, 93);
             this.txtCantidadBaños.Name = "txtCantidadBaños";
-            this.txtCantidadBaños.Size = new System.Drawing.Size(66, 23);
+            this.txtCantidadBaños.Size = new System.Drawing.Size(91, 23);
             this.txtCantidadBaños.TabIndex = 29;
             // 
             // label46
@@ -800,7 +801,7 @@ namespace proyecto1
             // label48
             // 
             this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(487, 93);
+            this.label48.Location = new System.Drawing.Point(567, 96);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(96, 15);
             this.label48.TabIndex = 26;
@@ -825,14 +826,14 @@ namespace proyecto1
             // 
             // txtMetrosCuadrados
             // 
-            this.txtMetrosCuadrados.Location = new System.Drawing.Point(589, 61);
+            this.txtMetrosCuadrados.Location = new System.Drawing.Point(669, 64);
             this.txtMetrosCuadrados.Name = "txtMetrosCuadrados";
-            this.txtMetrosCuadrados.Size = new System.Drawing.Size(66, 23);
+            this.txtMetrosCuadrados.Size = new System.Drawing.Size(91, 23);
             this.txtMetrosCuadrados.TabIndex = 24;
             // 
             // txtValor
             // 
-            this.txtValor.Location = new System.Drawing.Point(589, 34);
+            this.txtValor.Location = new System.Drawing.Point(669, 37);
             this.txtValor.Name = "txtValor";
             this.txtValor.Size = new System.Drawing.Size(91, 23);
             this.txtValor.TabIndex = 23;
@@ -873,7 +874,7 @@ namespace proyecto1
             // label52
             // 
             this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(473, 63);
+            this.label52.Location = new System.Drawing.Point(553, 66);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(110, 15);
             this.label52.TabIndex = 9;
@@ -882,7 +883,7 @@ namespace proyecto1
             // label53
             // 
             this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(544, 37);
+            this.label53.Location = new System.Drawing.Point(624, 40);
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(39, 15);
             this.label53.TabIndex = 7;
@@ -892,7 +893,7 @@ namespace proyecto1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(821, 558);
+            this.ClientSize = new System.Drawing.Size(920, 636);
             this.Controls.Add(this.panelFormularioDepartamento);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MantenedorDepartamento";
@@ -901,13 +902,13 @@ namespace proyecto1
             this.Load += new System.EventHandler(this.MantenedorDepartamento_Load);
             this.panelFormularioDepartamento.ResumeLayout(false);
             this.panelFormularioDepartamento.PerformLayout();
+            this.panelModificarDepartamento.ResumeLayout(false);
+            this.panelModificarDepartamento.PerformLayout();
+            this.panelMostrarDepartamento.ResumeLayout(false);
             this.panelModificarDepartamento2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartamentos3)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.panelModificarDepartamento.ResumeLayout(false);
-            this.panelModificarDepartamento.PerformLayout();
-            this.panelMostrarDepartamento.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepartamentos2)).EndInit();
             this.panelCrudDepartamento.ResumeLayout(false);
             this.panelCrudDepartamento.PerformLayout();

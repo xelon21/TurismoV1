@@ -30,15 +30,20 @@ namespace proyecto1
         private async void getGastos()
         {
             List<GastosDepto> lst = new List<GastosDepto>();
+            
             var com = await gastoController.TraerGastosDeptos();
             foreach (var item in com.gastosDepto)
             {
-                if(item.id_empleado_id == LoginUsuario.idEmpleado)
+               
+                if (item.id_empleado_id == LoginUsuario.idEmpleado)
                 {
                     lst.Add(item);
                 }
+                
             }
-            dgvInformePago.DataSource = lst;       
+
+            dgvInformePago.DataSource = lst;
+            
         }
         public async Task CargaMedioDePago()
         {
@@ -56,17 +61,34 @@ namespace proyecto1
         public async Task CargaDeptos()
         {
             List<Departamento> lst = new List<Departamento>();
+            List<Departamento> lstAdmin = new List<Departamento>();
             var com = await combo.CargarComboDeptos();
             foreach (var item in com.Departamentos)
             {
-                if(item.id_zona_id == LoginUsuario.idZona)
+                if (LoginUsuario.rol == 1)
+                {
+                    lstAdmin.Add(item);
+                }
+                else if (item.id_zona_id == LoginUsuario.idZona)
                 {
                     lst.Add(item);                  
                 }
             }
-            cmbDepartamentos.DataSource = lst;
-            cmbDepartamentos.DisplayMember = "direccion";
-            cmbDepartamentos.ValueMember = "id_depto";
+
+            if (LoginUsuario.rol == 1)
+            {
+               
+                cmbDepartamentos.DataSource = lstAdmin;
+                cmbDepartamentos.DisplayMember = "direccion";
+                cmbDepartamentos.ValueMember = "id_depto";
+            }
+            else
+            {               
+                cmbDepartamentos.DataSource = lst;
+                cmbDepartamentos.DisplayMember = "direccion";
+                cmbDepartamentos.ValueMember = "id_depto";
+            }
+            
         }
 
 

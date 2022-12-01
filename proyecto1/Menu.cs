@@ -81,7 +81,11 @@ namespace proyecto1
                         new SubMenu()
                         {
                             nombre = "Servicio Extra"
-                        }                       
+                        },
+                        new SubMenu()
+                        {
+                            nombre = "Ingreso Sueldos"
+                        }
                     }
                 }
             };      
@@ -189,6 +193,13 @@ namespace proyecto1
                 IngresarMantencionDepartamentos mantencnionDepartamentos = new IngresarMantencionDepartamentos();
                 mantencnionDepartamentos.MdiParent = this;
                 mantencnionDepartamentos.Show();
+            }
+            if (sender.ToString() == "Ingreso Sueldos")
+            {
+                PagoSueldos pagoSueldos = new PagoSueldos();
+                pagoSueldos.MdiParent = this;
+                pagoSueldos.Show();
+
             }
         }
     }
