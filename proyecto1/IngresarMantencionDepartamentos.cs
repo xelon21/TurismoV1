@@ -63,14 +63,16 @@ namespace proyecto1
         {
             List<Departamento> lst = new List<Departamento>();
             var com = await combo.CargarComboDeptos();
-            foreach (var item in com.Departamentos)
+            if ( com != null)
             {
-                if(item.id_zona_id == LoginUsuario.idZona)
+                foreach (var item in com.Departamentos)
                 {
-                    lst.Add(item);                  
+                    if (item.id_zona_id == LoginUsuario.idZona)
+                    {
+                        lst.Add(item);
+                    }
                 }
-            }
-            cmbDepartamentos.DataSource = lst;
+            }            cmbDepartamentos.DataSource = lst;
             cmbDepartamentos.DisplayMember = "direccion";
             cmbDepartamentos.ValueMember = "id_depto";
         }

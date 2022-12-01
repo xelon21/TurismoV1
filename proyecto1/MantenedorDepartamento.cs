@@ -65,10 +65,13 @@ namespace proyecto1
         {
             List<Departamento> lst = new List<Departamento>();
             var com = await departamentos.TraerDepartamentos();
-            foreach (var item in com.Departamentos)
+            if (com != null)
             {
-                lst.Add(item);
-            }                       
+                foreach (var item in com.Departamentos)
+                {
+                    lst.Add(item);
+                }
+            }             
             dgvDepartamentos.DataSource = lst;
             dgvDepartamentos2.DataSource = lst;
             dgvDepartamentos3.DataSource = lst;

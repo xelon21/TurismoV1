@@ -59,9 +59,12 @@ namespace proyecto1
         {
             List<ServiciosExtra> lst = new List<ServiciosExtra>();
             var com = await serv.TraeServiciosExtras();
-            foreach (var item in com.servicioExtra)
+            if (com != null)
             {
-                lst.Add(item);
+                foreach (var item in com.servicioExtra)
+                {
+                    lst.Add(item);
+                }
             }
             dgvServicioExtra.DataSource = lst;
         }

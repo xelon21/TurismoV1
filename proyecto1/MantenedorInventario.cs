@@ -48,9 +48,12 @@ namespace proyecto1
         {
             List<TipoArticulo> lst = new List<TipoArticulo>();
             var com = await combo.CargarCategorias();
-            foreach (var item in com.tipoArticulo)
+            if (com != null)
             {
-                lst.Add(item);
+                foreach (var item in com.tipoArticulo)
+                {
+                    lst.Add(item);
+                }
             }
             cmbTipoArticulo.DataSource = lst;
             cmbTipoArticulo.DisplayMember = "descripcion";
@@ -64,9 +67,12 @@ namespace proyecto1
         {
             List<Departamento> lst = new List<Departamento>();
             var com = await combo.CargarComboDeptos();
-            foreach (var item in com.Departamentos)
+            if (com != null)
             {
-                lst.Add(item);
+                foreach (var item in com.Departamentos)
+                {
+                    lst.Add(item);
+                }
             }
             cmbNumeroDepartamento.DataSource = lst;
             cmbNumeroDepartamento.DisplayMember = "direccion";
@@ -80,9 +86,12 @@ namespace proyecto1
         {
             List<Articulo> lst = new List<Articulo>();
             var com = await controller.TraerArticulos();
-            foreach (var item in com.Articulo)
+            if (com != null)
             {
-                lst.Add(item);
+                foreach (var item in com.Articulo)
+                {
+                    lst.Add(item);
+                }
             }
             dgvInventario.DataSource = lst;
             dgvInventario2.DataSource = lst;
@@ -139,9 +148,12 @@ namespace proyecto1
                 long idDepto = long.Parse(cmbNumeroDepartamento.SelectedValue.ToString());
 
                 var detInv = await controller.TraerInventarios();
-                foreach (var item in detInv.inventario)
+                if (detInv != null)
                 {
-                    lst3.Add(item);                
+                    foreach (var item in detInv.inventario)
+                    {
+                        lst3.Add(item);                
+                    }
                 }
 
                 foreach (var item in lst3)
@@ -194,28 +206,31 @@ namespace proyecto1
                         }
 
                         var detInv2 = await controller.TraerDetallesInventarios();
-                        foreach (var item in detInv2.detalleInventario)
+                        if (detInv2 != null)
                         {
-                            if (item.id_inventario_id == idInv)
+                            foreach (var item in detInv2.detalleInventario)
                             {
-                                bool respDetInv = await controller.IngresarDetalleInventario(idArt, idInv);
-                                if (!respDetInv)
+                                if (item.id_inventario_id == idInv)
                                 {
-                                    MessageBox.Show("Se a agregado un Artículo");
-                                    GetArticulos();
-                                    creadoEnInventario = true;
-                                    return;
+                                    bool respDetInv = await controller.IngresarDetalleInventario(idArt, idInv);
+                                    if (!respDetInv)
+                                    {
+                                        MessageBox.Show("Se a agregado un Artículo");
+                                        GetArticulos();
+                                        creadoEnInventario = true;
+                                        return;
+                                    }
+                                    else
+                                    {
+
+                                        MessageBox.Show("No se agregó el Artículo");
+                                        return;
+                                    }
                                 }
                                 else
                                 {
-
-                                    MessageBox.Show("No se agregó el Artículo");
-                                    return;
+                                    creadoEnInventario = false;
                                 }
-                            }
-                            else
-                            {
-                                creadoEnInventario = false;
                             }
                         }
                     }

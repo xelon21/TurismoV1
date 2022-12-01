@@ -70,9 +70,12 @@ namespace proyecto1
         {
             List<Zona> lst = new List<Zona>();
             var com = await combo.CargarComboBoxZona();
-            foreach (var item in com.Zona)
+            if (com != null)
             {
-                lst.Add(item);
+                foreach (var item in com.Zona)
+                {
+                    lst.Add(item);
+                }
             }
             cmbZona.DataSource = lst;
             cmbZona.DisplayMember = "descripcion";
@@ -84,10 +87,13 @@ namespace proyecto1
         {
             List<Departamento> lst = new List<Departamento>();
             var com = await depto.TraerDepartamentos();
-            foreach (var item in com.Departamentos)
+            if ( com != null )
             {
-                lst.Add(item);
-                lstDepartamentos.Add(item);
+                foreach (var item in com.Departamentos)
+                {
+                    lst.Add(item);
+                    lstDepartamentos.Add(item);
+                }
             }
             cmbDepartamento.DataSource = lst;
             cmbDepartamento.DisplayMember = "direccion";
